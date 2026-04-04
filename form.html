@@ -130,5 +130,21 @@
     <div class="footer__copyright">Lendihub 2026 | All Rights Reserved</div>
   </div>
 </footer>
+
+<!-- Auto-scroll to form when question changes -->
+<script>
+!function(){
+  var f=document.getElementById("leadcapture-form");
+  if(!f)return;
+  new MutationObserver(function(){
+    setTimeout(function(){
+      var r=f.getBoundingClientRect();
+      var y=window.scrollY+r.top-Math.max(0,(window.innerHeight-r.height)/2);
+      window.scrollTo({top:Math.max(0,y),behavior:"smooth"});
+    },150);
+  }).observe(f,{childList:true,subtree:true,attributes:true});
+}();
+</script>
+
 </body>
 </html>

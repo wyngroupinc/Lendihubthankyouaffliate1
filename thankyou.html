@@ -200,9 +200,16 @@
   </div>
 </footer>
 
-<!-- COUNTDOWN (only JS on the page - 300 bytes minified) -->
+<!-- COUNTDOWN + BACK BUTTON PREVENTION -->
 <script>
+// Countdown timer
 !function(){var t=899,e=["cd1","cd2","cd3"];setInterval(function(){if(t>0){t--;var n=Math.floor(t/60),o=t%60,r=n+":"+(o<10?"0":"")+o;e.forEach(function(t){var e=document.getElementById(t);e&&(e.textContent=r)})}},1e3)}();
+
+// Prevent back button — pushes a new history entry so back button stays on this page
+history.pushState(null,null,location.href);
+window.addEventListener("popstate",function(){
+  history.pushState(null,null,location.href);
+});
 </script>
 
 </body>
