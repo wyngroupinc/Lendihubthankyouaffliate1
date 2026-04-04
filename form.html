@@ -144,6 +144,9 @@
     },150);
   }).observe(f,{childList:true,subtree:true,attributes:true});
 }();
+
+// Mark that user entered the funnel (checked on thank you page)
+sessionStorage.setItem("funnel","active");
 </script>
 
 </body>
