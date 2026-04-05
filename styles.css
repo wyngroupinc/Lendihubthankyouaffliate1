@@ -221,12 +221,6 @@ ul { list-style: none; padding: 0; }
   /* Line breaks — hide on mobile so text reflows naturally */
   .br { display: inline; }
 
-  /* Hero */
-  .hero-phone { display: none; }
-  .hero-grid { grid-template-columns: 1fr !important; text-align: center; }
-  .hero-grid .trust-row { justify-content: center !important; }
-  .hero-grid .divider { justify-content: center !important; }
-
   /* Buttons */
   .btn { padding: 16px 32px; font-size: 16px; width: 100%; }
 
