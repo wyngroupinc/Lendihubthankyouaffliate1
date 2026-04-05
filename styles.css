@@ -180,6 +180,7 @@ ul { list-style: none; padding: 0; }
 .icon-box--lg { width: 64px; height: 64px; border-radius: 16px; }
 .divider { border-top: 1px solid var(--border); }
 .bg-white { background: var(--white); }
+.br { display: block; }
 
 /* Spacing */
 .mb-4{margin-bottom:4px}.mb-6{margin-bottom:6px}.mb-8{margin-bottom:8px}.mb-10{margin-bottom:10px}
@@ -198,13 +199,100 @@ ul { list-style: none; padding: 0; }
 
 /* --- RESPONSIVE --- */
 @media (max-width: 768px) {
+  /* Layout */
   .grid-2, .grid-3 { grid-template-columns: 1fr; }
-  .compare { grid-template-columns: 1fr; gap: 16px; }
-  .compare__arrow { display: none; }
-  .section { padding: 50px 0; }
-  .btn { padding: 18px 36px; font-size: 16px; }
-  .nav__logo { height: 44px; }
-  .sticky-bar { flex-wrap: wrap; gap: 10px; padding: 10px 16px; }
+  .section { padding: 40px 0; }
+  .section--sm { padding: 32px 0; }
   .container, .container--narrow, .container--mid, .container--form { padding: 0 16px; }
+
+  /* Typography */
+  .heading--xl { font-size: 32px !important; }
+  .heading--lg { font-size: 28px !important; }
+  .heading--md { font-size: 24px !important; }
+  .heading--sm { font-size: 20px !important; }
+  .heading--xs { font-size: 18px !important; }
+  .subhead { font-size: 15px !important; }
+  .quote { font-size: 20px !important; }
+
+  /* Nav */
+  .nav { padding: 12px 16px; }
+  .nav__logo { height: 36px; }
+
+  /* Line breaks — hide on mobile so text reflows naturally */
+  .br { display: inline; }
+
+  /* Hero */
+  .hero-phone { display: none; }
+  .hero-grid { grid-template-columns: 1fr !important; text-align: center; }
+  .hero-grid .trust-row { justify-content: center !important; }
+  .hero-grid .divider { justify-content: center !important; }
+
+  /* Buttons */
+  .btn { padding: 16px 32px; font-size: 16px; width: 100%; }
+
+  /* Cards */
+  .card { padding: 20px; }
+  .card--highlight { padding: 24px 20px !important; }
+  .risk-card { flex-direction: column !important; padding: 24px 20px !important; gap: 16px !important; }
+
+  /* Stats bar */
+  .stats-bar { gap: 24px !important; }
+  .stat__number { font-size: 24px; }
+  .stat__label { font-size: 12px; }
+
+  /* Comparison */
+  .compare { grid-template-columns: 1fr; gap: 12px; }
+  .compare__arrow { display: none; }
+  .compare__left, .compare__right { padding: 20px; }
+
+  /* FAQ */
+  .faq { padding: 20px; }
+
+  /* Trust rows */
+  .trust-row { gap: 12px; }
+  .trust-item { font-size: 12px; }
+
+  /* Offer cards */
+  .offer { padding: 18px; }
+  .offer__lender { font-size: 14px; }
+  .offer__value { font-size: 17px; }
+  .offer__grid { gap: 8px; }
+
+  /* Progress */
+  .progress__labels { font-size: 10px; }
+
+  /* Countdown */
+  .countdown-box { padding: 12px 18px; flex-wrap: wrap; justify-content: center; }
+  .countdown-timer { font-size: 24px; }
+
+  /* Sticky bar */
+  .sticky-bar { flex-wrap: wrap; gap: 8px; padding: 10px 16px; font-size: 12px; }
+  .sticky-bar__btn { padding: 10px 20px; font-size: 13px; }
+
+  /* SSL badge */
+  .ssl-badge { font-size: 11px; padding: 6px 14px; }
+
+  /* Footer */
+  .footer { padding: 32px 16px 40px; }
+  .footer__links { flex-wrap: wrap; gap: 12px; }
+  .footer__copyright { font-size: 10px; }
+
+  /* Icon boxes */
+  .icon-box { width: 48px; height: 48px; }
+  .icon-box--lg { width: 56px; height: 56px; }
+
+  /* Checklist */
+  .checklist li { font-size: 13px; }
+
+  /* Badge */
+  .badge { font-size: 11px; padding: 5px 12px; }
 }
-</style>
+
+/* Small phones */
+@media (max-width: 380px) {
+  .heading--xl { font-size: 26px !important; }
+  .heading--lg { font-size: 24px !important; }
+  .btn { padding: 14px 24px; font-size: 15px; }
+  .trust-row { flex-direction: column; align-items: center; gap: 8px; }
+  .sticky-bar { justify-content: center; }
+}
