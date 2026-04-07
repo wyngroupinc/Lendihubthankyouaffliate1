@@ -53,7 +53,7 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
 <!-- HEADLINE -->
 <section style="padding:36px 24px 24px;">
   <div class="container--form text-center">
-    <h1 class="heading heading--lg mb-14">You're one step away from<span class="br"></span>seeing your options.</h1>
+    <h1 class="heading heading--lg mb-14">You're one step away from <span class="br"></span>seeing your options.</h1>
     <p class="subhead" style="max-width:500px;margin:0 auto;">Answer a few quick questions and <strong class="bold">75+ lenders</strong> will compete to fund your business. Takes about 60 seconds.</p>
   </div>
 </section>
@@ -63,6 +63,12 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
   <div class="container--form">
     <div style="background:var(--white);border:1px solid var(--green-accent);border-radius:var(--radius-lg);padding:40px 40px;box-shadow:var(--shadow-lg);">
       <div id="leadcapture-form">
+        <!-- Loading placeholder (hides when form loads) -->
+        <div id="form-loader" style="text-align:center;padding:48px 20px;">
+          <div style="width:48px;height:48px;border:4px solid var(--border);border-top-color:var(--green);border-radius:50%;margin:0 auto 16px;animation:spin .8s linear infinite;"></div>
+          <div style="font-weight:700;font-size:15px;color:var(--text);margin-bottom:6px;">Loading your application...</div>
+          <div style="font-size:13px;color:var(--text-light);">This usually takes a few seconds</div>
+        </div>
         <script src="https://my.leadcapture.io/embed.min.js" data-funnel="GRPrs1N7cY"></script>
       </div>
       <noscript><div class="text-center" style="padding:40px 20px;"><p class="body-text">Please enable JavaScript to view the form.</p></div></noscript>
@@ -148,23 +154,34 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
   </div>
 </footer>
 
-<!-- Auto-scroll to form when question changes -->
+<!-- Auto-scroll to form when question changes + hide loader -->
 <script>
 !function(){
   var f=document.getElementById("leadcapture-form");
+  var loader=document.getElementById("form-loader");
   if(!f)return;
   new MutationObserver(function(){
+    // Hide loader once form content appears
+    if(loader&&f.querySelector("iframe,form,input,button,[class]")){
+      loader.style.display="none";
+      loader=null;
+    }
     setTimeout(function(){
       var r=f.getBoundingClientRect();
       var y=window.scrollY+r.top-Math.max(0,(window.innerHeight-r.height)/2);
       window.scrollTo({top:Math.max(0,y),behavior:"smooth"});
     },150);
   }).observe(f,{childList:true,subtree:true,attributes:true});
+
+  // Fallback: hide loader after 8 seconds regardless
+  setTimeout(function(){if(loader)loader.style.display="none";},8000);
 }();
 
-// Mark that user entered the funnel (checked on thank you page)
+// Mark that user entered the funnel
 sessionStorage.setItem("funnel","active");
 </script>
+
+<style>@keyframes spin{to{transform:rotate(360deg)}}</style>
 
 </body>
 </html>
