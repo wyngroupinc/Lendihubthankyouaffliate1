@@ -97,7 +97,17 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
     </div>
   </div>
 </section>
-<script>document.getElementById("activity-count").textContent=Math.floor(Math.random()*401)+100;</script>
+<script>
+!function(){
+  var now=new Date();
+  var mins=now.getHours()*60+now.getMinutes();
+  // 0 mins (midnight) = ~500, 1440 mins (11:59pm) = ~2000
+  var base=500+Math.floor((mins/1440)*1500);
+  // Add small random variance so it doesn't look robotic
+  var jitter=Math.floor(Math.random()*31)-15;
+  document.getElementById("activity-count").textContent=Math.max(500,base+jitter);
+}();
+</script>
 
 <!-- WHAT HAPPENS NEXT -->
 <section class="section--sm divider">
