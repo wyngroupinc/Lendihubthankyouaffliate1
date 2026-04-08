@@ -93,10 +93,11 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
   <div style="max-width:400px;margin:0 auto;">
     <div class="card text-center" style="padding:12px 18px;display:flex;align-items:center;justify-content:center;gap:10px;">
       <span class="dot dot--green"></span>
-      <span class="small-text"><strong class="bold">47</strong> business owners checked options today</span>
+      <span class="small-text"><strong class="bold" id="activity-count">47</strong> business owners checked options today</span>
     </div>
   </div>
 </section>
+<script>document.getElementById("activity-count").textContent=Math.floor(Math.random()*401)+100;</script>
 
 <!-- WHAT HAPPENS NEXT -->
 <section class="section--sm divider">
