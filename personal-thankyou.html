@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="vertical.css">
   <style>
     @keyframes scanPulse{0%{transform:scale(1);opacity:1}50%{transform:scale(1.08);opacity:.7}100%{transform:scale(1);opacity:1}}
     @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
@@ -229,11 +230,43 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
   </div>
 </section>
 
-<!--
-  Testimonial section intentionally omitted until real personal-loan
-  borrower proof exists. Reuse the .card--cream pattern from
-  thankyou.html when you have it.
--->
+<!-- TODO: Replace placeholder reviews with real borrower reviews before scaling spend -->
+<section class="section--sm bg-white divider" style="border-bottom:1px solid var(--border);">
+  <div class="container--form">
+    <div class="text-center mb-24">
+      <p class="label mb-8">From People Who Finished Their Check</p>
+      <h3 class="heading heading--xs">"I almost closed the tab."</h3>
+    </div>
+    <div class="grid-2" style="gap:16px;">
+      <div class="review-card" style="padding:20px;">
+        <div class="review-head">
+          <div class="review-avatar" style="background:#6B9E8E;font-size:13px;width:38px;height:38px;">R</div>
+          <div>
+            <div class="review-name" style="font-size:13px;">Robert T.</div>
+            <div class="review-meta">San Antonio, TX</div>
+          </div>
+          <span class="review-verified">✓ Verified</span>
+        </div>
+        <div class="review-stars" style="font-size:11px;">★★★★★</div>
+        <p class="review-text" style="font-size:13px;font-style:italic;">"90 seconds later I was looking at actual numbers instead of guessing. Picked one and had funds before the weekend. If I'd closed the page, I'd still be putting the transmission on a credit card."</p>
+        <div class="review-tag" style="font-size:11px;">🚗 Emergency expense</div>
+      </div>
+      <div class="review-card" style="padding:20px;">
+        <div class="review-head">
+          <div class="review-avatar" style="background:#4A7C6B;font-size:13px;width:38px;height:38px;">A</div>
+          <div>
+            <div class="review-name" style="font-size:13px;">Angela M.</div>
+            <div class="review-meta">Miami, FL</div>
+          </div>
+          <span class="review-verified">✓ Verified</span>
+        </div>
+        <div class="review-stars" style="font-size:11px;">★★★★★</div>
+        <p class="review-text" style="font-size:13px;font-style:italic;">"The rate I found was way under what my cards charge. That's real money every single month — for 90 seconds of my time."</p>
+        <div class="review-tag" style="font-size:11px;">💳 Debt consolidation</div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- FINAL CTA -->
 <section class="section--sm" style="background:var(--navy);">

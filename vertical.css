@@ -32,3 +32,51 @@
   .choice-card { padding: 26px 22px; }
   .choice-card__title { font-size: 20px; }
 }
+
+/* --- HERO DECOR (soft background glow) --- */
+.hero-decor { position: relative; overflow: hidden; }
+.hero-decor::before { content: ""; position: absolute; top: -120px; left: 50%; transform: translateX(-70%); width: 560px; height: 560px; background: radial-gradient(circle, rgba(52,192,148,.12), transparent 65%); pointer-events: none; }
+.hero-decor::after { content: ""; position: absolute; bottom: -160px; right: -80px; width: 480px; height: 480px; background: radial-gradient(circle, rgba(27,42,74,.07), transparent 65%); pointer-events: none; }
+.hero-decor > * { position: relative; z-index: 1; }
+
+/* --- MINI OFFER PREVIEW (hero teaser cards) --- */
+.preview-stack { display: flex; gap: 16px; justify-content: center; align-items: stretch; margin-top: 44px; flex-wrap: wrap; }
+.mini-offer { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 18px 22px; box-shadow: var(--shadow-md); text-align: left; min-width: 230px; position: relative; }
+.mini-offer--tilt-l { transform: rotate(-1.5deg); }
+.mini-offer--tilt-r { transform: rotate(1.5deg); }
+.mini-offer__lender { font-weight: 800; font-size: 13px; color: var(--text); }
+.mini-offer__row { display: flex; gap: 18px; margin-top: 12px; }
+.mini-offer__stat .lbl { font-size: 10px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 3px; }
+.mini-offer__stat .val { font-size: 17px; font-weight: 800; color: var(--text); filter: blur(5px); user-select: none; }
+.mini-offer__stat .val--green { color: var(--green); }
+.mini-offer__badge { position: absolute; top: -11px; right: 14px; background: var(--green); color: #fff; font-size: 10px; font-weight: 800; border-radius: 100px; padding: 4px 12px; letter-spacing: .04em; }
+.preview-caption { font-size: 11px; color: var(--text-light); margin-top: 14px; }
+
+/* --- RATING BADGE --- */
+.rating-badge { display: inline-flex; align-items: center; gap: 10px; background: var(--white); border: 1px solid var(--border); border-radius: 100px; padding: 9px 20px; box-shadow: var(--shadow-sm); }
+.rating-badge__stars { color: var(--gold); font-size: 14px; letter-spacing: 2px; }
+.rating-badge__text { font-size: 12px; font-weight: 700; color: var(--text); }
+.rating-badge__text span { color: var(--text-light); font-weight: 600; }
+
+/* --- REVIEW CARDS --- */
+.review-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 26px; display: flex; flex-direction: column; box-shadow: var(--shadow-sm); transition: transform .2s, box-shadow .2s; }
+.review-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.review-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.review-avatar { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 800; font-size: 15px; flex-shrink: 0; }
+.review-name { font-weight: 700; font-size: 14px; color: var(--text); }
+.review-meta { font-size: 11px; color: var(--text-light); }
+.review-verified { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 800; color: var(--green); background: var(--green-pale); border-radius: 100px; padding: 3px 9px; margin-left: auto; white-space: nowrap; }
+.review-stars { color: var(--gold); font-size: 13px; letter-spacing: 2px; margin-bottom: 10px; }
+.review-text { font-size: 14px; line-height: 1.65; color: var(--text-mid); flex: 1; }
+.review-tag { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; font-weight: 800; color: var(--green); display: flex; align-items: center; gap: 6px; }
+
+/* --- SECTION NUMBER CHIPS (how-it-works polish) --- */
+.step-chip { width: 34px; height: 34px; border-radius: 50%; background: var(--navy); color: #fff; font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; }
+
+@media (max-width: 768px) {
+  .preview-stack { gap: 10px; margin-top: 32px; }
+  .mini-offer { min-width: 0; flex: 1 1 45%; padding: 14px 16px; }
+  .mini-offer__stat .val { font-size: 14px; }
+  .mini-offer--tilt-l, .mini-offer--tilt-r { transform: none; }
+  .review-card { padding: 20px; }
+}
