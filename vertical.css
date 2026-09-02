@@ -1,0 +1,34 @@
+/* ============================================
+   LENDI HUB — Vertical Split Additions
+   Load AFTER styles.css on pages that need it
+   ============================================ */
+
+/* --- NAV WITH VERTICAL LINKS --- */
+.nav--split { justify-content: space-between; max-width: 1100px; margin: 0 auto; border-bottom: none; }
+.nav-wrap { background: var(--white); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
+.nav-wrap .nav { position: static; border-bottom: none; }
+.nav__links { display: flex; gap: 22px; align-items: center; }
+.nav__links a { font-size: 14px; font-weight: 700; color: var(--text-mid); transition: color .15s; }
+.nav__links a:hover { color: var(--navy); }
+.nav__links a.active { color: var(--green); }
+
+/* --- CHOOSER CARDS (homepage) --- */
+.choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.choice-card { display: block; background: var(--white); border: 2px solid var(--border); border-radius: var(--radius-lg); padding: 36px 32px; text-align: left; transition: transform .2s, box-shadow .2s, border-color .2s; position: relative; }
+.choice-card:hover { transform: translateY(-4px); border-color: var(--green-accent); box-shadow: var(--shadow-lg); }
+.choice-card__icon { width: 60px; height: 60px; border-radius: 16px; background: var(--green-pale); display: flex; align-items: center; justify-content: center; font-size: 26px; margin-bottom: 18px; }
+.choice-card__title { font-family: 'Fraunces', serif; font-weight: 800; font-size: 24px; color: var(--text); margin-bottom: 8px; }
+.choice-card__desc { font-size: 14px; line-height: 1.6; color: var(--text-mid); margin-bottom: 18px; }
+.choice-card__list { margin-bottom: 22px; }
+.choice-card__list li { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; color: var(--text-mid); margin-bottom: 8px; line-height: 1.5; }
+.choice-card__list li::before { content: "✓"; color: var(--green); font-weight: 800; flex-shrink: 0; }
+.choice-card__cta { display: block; background: var(--navy); color: #fff; border-radius: 12px; padding: 15px; text-align: center; font-weight: 800; font-size: 15px; transition: background .2s; }
+.choice-card:hover .choice-card__cta { background: var(--green); }
+
+@media (max-width: 768px) {
+  .nav__links { gap: 14px; }
+  .nav__links a { font-size: 12px; }
+  .choice-grid { grid-template-columns: 1fr; gap: 14px; }
+  .choice-card { padding: 26px 22px; }
+  .choice-card__title { font-size: 20px; }
+}
