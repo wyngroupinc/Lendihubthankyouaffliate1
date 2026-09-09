@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <title>Lendi Hub — Your Offers Are Ready</title>
+  <meta name="referrer" content="strict-origin">
+  <title>Lendi Hub — Your Match Is Ready</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20width%3D%2264%22%20height%3D%2264%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22gF%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%232D8C6E%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2334C094%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20x%3D%220%22%20y%3D%220%22%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2216%22%20fill%3D%22%23FFFFFF%22%2F%3E%3Cpath%20d%3D%22M18%2012%20L18%2046%20L46%2046%22%20stroke%3D%22url%28%23gF%29%22%20stroke-width%3D%2210%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Ccircle%20cx%3D%2246%22%20cy%3D%2222%22%20r%3D%227%22%20fill%3D%22%2334C094%22%2F%3E%3C%2Fsvg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,6 +19,13 @@
     .scan-check svg{flex-shrink:0}
     #loading-phase{transition:opacity .4s ease}
     #offers-phase{animation:fadeUp .6s ease-out}
+    #lh-debug{position:fixed;left:0;right:0;bottom:0;z-index:9999;max-height:55vh;overflow:auto;background:#0f172a;color:#e2e8f0;font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;padding:14px 16px;border-top:3px solid #34C094}
+    #lh-debug h4{margin:0 0 8px;color:#34C094;font-size:13px}
+    #lh-debug table{width:100%;border-collapse:collapse}
+    #lh-debug td{padding:2px 8px 2px 0;vertical-align:top;word-break:break-all}
+    #lh-debug td:first-child{color:#94a3b8;white-space:nowrap}
+    #lh-debug .u{color:#fbbf24}
+    #lh-debug .miss{color:#f87171}
   </style>
 <!-- Meta Pixel Code -->
 <script>
@@ -79,9 +87,9 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
 <!-- STATUS + HEADLINE -->
 <section style="padding:40px 24px 10px;">
   <div class="container--form text-center">
-    <div class="mb-20"><span class="badge badge--green"><span class="check-circle"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span> Matching Complete — 2 Offers Found</span></div>
-    <h1 class="heading heading--lg mb-12">We found 2 lenders who want<br>to fund your business.</h1>
-    <p class="subhead" style="max-width:540px;margin:0 auto;"><strong class="bold">Rok Financial and Big Think Capital matched with your profile.</strong> Complete a quick 90-second verification to unlock your personalized rates, amounts, and terms below.</p>
+    <div class="mb-20"><span class="badge badge--green"><span class="check-circle"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span> Matching Complete — Lender Found</span></div>
+    <h1 class="heading heading--lg mb-12">You're matched with a lender<br>who funds businesses like yours.</h1>
+    <p class="subhead" style="max-width:540px;margin:0 auto;"><strong class="bold">Rok Financial is our top-rated funding partner</strong>, and your profile fits what they fund. Finish your application to see your actual amount, rate and terms. Your answers are already filled in, so it takes about 90 seconds.</p>
   </div>
 </section>
 
@@ -98,7 +106,7 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
       <span style="color:var(--green);">✓ Submitted</span>
       <span style="color:var(--green);">✓ Scanned</span>
       <span style="color:var(--green);">✓ Matched</span>
-      <span style="color:var(--red);font-weight:800;">🔒 Unlock offers</span>
+      <span style="color:var(--red);font-weight:800;">→ Finish application</span>
     </div>
   </div>
 </section>
@@ -107,43 +115,29 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
 <section style="padding:0 24px 16px;">
   <div class="container--form">
     <div class="card--green" style="border-radius:12px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
-      <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:20px;">🎯</span><span class="bold" style="font-size:15px;color:var(--navy);">2 lenders matched with your profile</span></div>
-      <span class="badge badge--red" style="font-size:12px;"><span class="dot dot--red"></span> Offers expire soon</span>
+      <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:20px;">🎯</span><span class="bold" style="font-size:15px;color:var(--navy);">Rok Financial matched with your profile</span></div>
+      <span class="badge badge--red" style="font-size:12px;"><span class="dot dot--red"></span> Same-day decisions close early</span>
     </div>
   </div>
 </section>
 
-<!-- OFFER CARDS -->
+<!-- OFFER CARD -->
 <section style="padding:0 24px 20px;">
   <div class="container--form" style="display:flex;flex-direction:column;gap:14px;">
 
     <!-- ROK FINANCIAL -->
-    <a href="https://go.mypartner.io/business-financing/?ref=001Qk00000cbKzZIAU" target="_blank" rel="noopener" class="offer">
-      <div class="offer__ribbon">Best Rate</div>
+    <a href="https://go.mypartner.io/business-financing/?ref=001Qk00000cbKzZIAU" data-rok target="_blank" rel="noopener" class="offer">
+      <div class="offer__ribbon">Your Match</div>
       <div class="offer__header">
         <span class="offer__lender">Rok Financial</span>
         <span class="offer__speed">⚡ Same-day approval</span>
       </div>
       <div class="offer__grid">
-        <div><div class="offer__label">Amount</div><div class="offer__value" style="color:var(--text);">$150,000</div></div>
-        <div><div class="offer__label">Est. Rate</div><div class="offer__value" style="color:var(--green);">6.9%</div></div>
-        <div><div class="offer__label">Term</div><div class="offer__value" style="color:var(--text);">36 mo</div></div>
+        <div><div class="offer__label">Pre-approval</div><div class="offer__value" style="color:var(--text);">Minutes</div></div>
+        <div><div class="offer__label">Credit</div><div class="offer__value" style="color:var(--green);">No min. FICO</div></div>
+        <div><div class="offer__label">Funding</div><div class="offer__value" style="color:var(--text);">24 hrs</div></div>
       </div>
-      <div class="offer__overlay"><div class="offer__unlock">🔓 Click to Unlock This Offer</div></div>
-    </a>
-
-    <!-- BIG THINK CAPITAL -->
-    <a href="https://lp.bigthinkcapital.com/#/lendihub" target="_blank" rel="noopener" class="offer" style="background:var(--white);border:1px solid var(--border);">
-      <div class="offer__header">
-        <span class="offer__lender">Big Think Capital</span>
-        <span class="offer__speed">24hr funding</span>
-      </div>
-      <div class="offer__grid">
-        <div><div class="offer__label">Amount</div><div class="offer__value" style="color:var(--text);">$200,000</div></div>
-        <div><div class="offer__label">Est. Rate</div><div class="offer__value" style="color:var(--green);">8.4%</div></div>
-        <div><div class="offer__label">Term</div><div class="offer__value" style="color:var(--text);">48 mo</div></div>
-      </div>
-      <div class="offer__overlay"><div class="offer__unlock">🔓 Click to Unlock This Offer</div></div>
+      <div class="offer__overlay"><div class="offer__unlock">🔓 Click to See Your Offer</div></div>
     </a>
 
   </div>
@@ -154,10 +148,10 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
   <div class="container--form">
     <div class="card--highlight text-center" style="padding:36px;">
       <div style="font-size:36px;" class="mb-12">🔓</div>
-      <h2 class="heading heading--sm mb-12">Verify your details to unlock both offers</h2>
-      <p class="body-text mb-20" style="max-width:480px;margin:0 auto;">Lenders need a quick verification before releasing your personalized rates and terms. Takes 90 seconds. No credit check. Completely free.</p>
-      <div class="countdown-box mb-24"><span class="countdown-label">Offers expire in:</span><span class="countdown-timer" id="cd1">14:59</span></div><br>
-      <a href="https://go.mypartner.io/business-financing/?ref=001Qk00000cbKzZIAU" target="_blank" rel="noopener" class="btn btn--navy btn--pulse">Unlock My Offers →</a>
+      <h2 class="heading heading--sm mb-12">Finish your application to see your offer</h2>
+      <p class="body-text mb-20" style="max-width:480px;margin:0 auto;">Rok Financial needs a few more details before releasing your rates and terms. We've carried over everything you already told us, so most of the form is done. No credit check to see your options. Completely free.</p>
+      <div class="countdown-box mb-24"><span class="countdown-label">Same-day funding cutoff in:</span><span class="countdown-timer" id="cd1">14:59</span></div><br>
+      <a href="https://go.mypartner.io/business-financing/?ref=001Qk00000cbKzZIAU" data-rok target="_blank" rel="noopener" class="btn btn--navy btn--pulse">Continue My Application →</a>
       <div class="trust-row mt-24">
         <span class="trust-item"><svg class="trust-check" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> No credit check</span>
         <span class="trust-item"><svg class="trust-check" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 90 seconds</span>
@@ -174,18 +168,18 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
       <div style="display:flex;gap:14px;align-items:flex-start;">
         <span style="font-size:28px;line-height:1;">⚠️</span>
         <div>
-          <h4 class="heading heading--xs mb-8">These offers won't wait forever.</h4>
-          <p class="body-text mb-12">Lender budgets reset daily. The rates you're seeing are based on <strong class="bold">today's availability.</strong> Every hour you wait, other business owners are claiming the same pool of funding.</p>
-          <p class="body-text"><strong class="bold">Other business owners in your area are being matched right now.</strong> Your rates are held temporarily — but not indefinitely.</p>
+          <h4 class="heading heading--xs mb-8">Same-day funding depends on when you apply.</h4>
+          <p class="body-text mb-12">Rok Financial can move a file the same day, but underwriting works on a daily cutoff. Applications that come in early get decided today. Applications that come in late wait for tomorrow.</p>
+          <p class="body-text"><strong class="bold">You've already done the hard part.</strong> The rest of the form is pre-filled and takes about 90 seconds.</p>
         </div>
       </div>
     </div>
     <div class="grid-3">
-      <div class="card text-center" style="padding:20px 16px;"><div class="stat__number" style="color:var(--navy);">94%</div><div class="stat__label">of owners who verify get an offer</div></div>
-      <div class="card text-center" style="padding:20px 16px;"><div class="stat__number" style="color:var(--navy);">$47K</div><div class="stat__label">average additional funding unlocked</div></div>
-      <div class="card text-center" style="padding:20px 16px;"><div class="stat__number" style="color:var(--navy);">24hrs</div><div class="stat__label">avg. time from verify to funded</div></div>
+      <div class="card text-center" style="padding:20px 16px;"><div class="stat__number" style="color:var(--navy);">15 sec</div><div class="stat__label">to an instant pre-approval</div></div>
+      <div class="card text-center" style="padding:20px 16px;"><div class="stat__number" style="color:var(--navy);">4+ mo</div><div class="stat__label">in business is all it takes to qualify</div></div>
+      <div class="card text-center" style="padding:20px 16px;"><div class="stat__number" style="color:var(--navy);">24hrs</div><div class="stat__label">from approval to funds in your account</div></div>
     </div>
-    <div class="text-center mt-32"><a href="https://lp.bigthinkcapital.com/#/lendihub" target="_blank" rel="noopener" class="btn btn--red btn--pulse">Unlock My Offers Before They Expire →</a></div>
+    <div class="text-center mt-32"><a href="https://go.mypartner.io/business-financing/?ref=001Qk00000cbKzZIAU" data-rok target="_blank" rel="noopener" class="btn btn--red btn--pulse">Continue Before Today's Cutoff →</a></div>
   </div>
 </section>
 
@@ -193,46 +187,54 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
 <section class="section--sm">
   <div class="container--form">
     <div class="text-center mb-32">
-      <h2 class="heading heading--sm mb-8">What happens if you don't verify?</h2>
-      <p class="subhead" style="font-size:15px;">(Spoiler: you lose both offers)</p>
+      <h2 class="heading heading--sm mb-8">What happens if you don't finish?</h2>
+      <p class="subhead" style="font-size:15px;">(Short version: nothing happens at all)</p>
     </div>
     <div class="grid-2" style="gap:20px;">
       <div class="compare__left">
-        <div class="compare__label" style="color:#B45309;">✗ If You Skip</div>
+        <div class="compare__label" style="color:#B45309;">✗ If You Stop Here</div>
         <ul class="checklist checklist--no">
-          <li>Both matched offers stay permanently locked</li>
-          <li>You'll never see what they were willing to offer</li>
-          <li>Your spots get reassigned to other applicants</li>
-          <li>Back to calling lenders on your own</li>
-          <li>No leverage, no options</li>
+          <li>Your application never reaches underwriting</li>
+          <li>You never find out what you'd have been approved for</li>
+          <li>The pre-filled form resets and you start over later</li>
+          <li>Back to calling lenders one at a time</li>
+          <li>No numbers, no leverage, no options</li>
         </ul>
       </div>
       <div class="compare__right">
-        <div class="compare__label" style="color:var(--green);">✓ If You Verify (90 sec)</div>
+        <div class="compare__label" style="color:var(--green);">✓ If You Finish (90 sec)</div>
         <ul class="checklist checklist--yes">
-          <li>Both personalized offers unlocked instantly</li>
-          <li>See exact rates, amounts, and terms</li>
-          <li>Priority placement in funding queues</li>
+          <li>Instant pre-approval decision</li>
+          <li>See your real amount, rate and term</li>
+          <li>A funding advisor walks you through the options</li>
           <li>Same-day approval possible</li>
-          <li>Compare both — pick the best deal</li>
+          <li>Zero obligation to accept anything</li>
         </ul>
       </div>
     </div>
-    <div class="text-center mt-32"><a href="https://go.mypartner.io/business-financing/?ref=001Qk00000cbKzZIAU" target="_blank" rel="noopener" class="btn btn--navy">Don't Leave Money on the Table →</a></div>
+    <div class="text-center mt-32"><a href="https://go.mypartner.io/business-financing/?ref=001Qk00000cbKzZIAU" data-rok target="_blank" rel="noopener" class="btn btn--navy">Don't Leave Money on the Table →</a></div>
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
+<!-- SOCIAL PROOF -->
 <section class="section--sm bg-white divider" style="border-bottom:1px solid var(--border);">
   <div class="container--form">
     <div class="text-center mb-24">
-      <p class="label mb-8">From Owners Who Unlocked Their Offers</p>
-      <h3 class="heading heading--xs">"I almost didn't click through."</h3>
+      <p class="label mb-8">About Rok Financial</p>
+      <h3 class="heading heading--xs">Rated Excellent on Trustpilot</h3>
+      <p class="small-text" style="margin-top:8px;">Based on 1,000+ verified customer reviews</p>
     </div>
     <div class="grid-2" style="gap:16px;">
-      <div class="card card--cream" style="padding:20px;"><div style="color:var(--green);font-size:12px;" class="mb-8">★★★★★</div><p class="small-text mb-12" style="font-style:italic;">"90 seconds later I'm looking at real offers with actual numbers. Picked one and was funded in 3 days. If I'd closed that page, I'd still be waiting."</p><div style="display:flex;justify-content:space-between;align-items:center;"><div><div class="bold" style="font-size:12px;">Marcus T.</div><div style="font-size:11px;color:var(--text-light);">Auto Repair, Dallas</div></div><span style="background:var(--green-pale);border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700;color:var(--green);">Funded $85K</span></div></div>
-      <div class="card card--cream" style="padding:20px;"><div style="color:var(--green);font-size:12px;" class="mb-8">★★★★★</div><p class="small-text mb-12" style="font-style:italic;">"The offer I unlocked was 4 points lower than my bank. That's $22,000 saved. For 90 seconds of my time."</p><div style="display:flex;justify-content:space-between;align-items:center;"><div><div class="bold" style="font-size:12px;">Sandra L.</div><div style="font-size:11px;color:var(--text-light);">Catering, Miami</div></div><span style="background:var(--green-pale);border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700;color:var(--green);">Saved $22K</span></div></div>
+      <div class="card card--cream" style="padding:20px;">
+        <h4 class="heading heading--xs mb-8">Technology-first underwriting</h4>
+        <p class="small-text">ROK Intelligence uses automated underwriting to return an instant pre-approval and flexible options built around your business, instead of a single take-it-or-leave-it offer.</p>
+      </div>
+      <div class="card card--cream" style="padding:20px;">
+        <h4 class="heading heading--xs mb-8">Compare before you commit</h4>
+        <p class="small-text">You choose the offer that makes the most sense for your business. Their offer calculator shows full transparency on terms up front, so there are no surprises later.</p>
+      </div>
     </div>
+    <p class="small-text text-center mt-24" style="color:var(--text-light);">Financing options include SBA loans, lines of credit, working capital, revenue-based financing, equipment financing, accounts receivable financing and commercial real estate.</p>
   </div>
 </section>
 
@@ -240,27 +242,26 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
 <section class="section--sm" style="background:var(--navy);">
   <div class="container--form text-center">
     <div style="font-size:50px;" class="mb-16">🔓</div>
-    <h2 class="heading heading--lg" style="color:#fff;margin-bottom:16px;">2 lenders are waiting on you.</h2>
-    <p style="font-size:18px;color:rgba(255,255,255,.7);margin-bottom:12px;line-height:1.55;">They've reviewed your profile. They've set aside funding. All they need is 90 seconds of verification.</p>
-    <p style="font-size:15px;color:rgba(255,255,255,.4);margin-bottom:10px;">You're this close. Don't leave without seeing what's yours.</p>
-    <div class="countdown-box" style="background:rgba(220,38,38,.15);border-color:rgba(220,38,38,.3);margin:20px auto 28px;"><span class="countdown-label" style="color:#FCA5A5;">Offers expire in:</span><span class="countdown-timer" id="cd2" style="color:#FCA5A5;">14:59</span></div><br>
-    <a href="https://lp.bigthinkcapital.com/#/lendihub" target="_blank" rel="noopener" class="btn btn--green btn--pulse" style="font-size:20px;">Unlock My 2 Offers — Free →</a>
+    <h2 class="heading heading--lg" style="color:#fff;margin-bottom:16px;">You're one step from your offer.</h2>
+    <p style="font-size:18px;color:rgba(255,255,255,.7);margin-bottom:12px;line-height:1.55;">Your details are already carried over. Rok Financial just needs you to confirm them and hit apply.</p>
+    <p style="font-size:15px;color:rgba(255,255,255,.4);margin-bottom:10px;">You're this close. Don't leave without seeing your numbers.</p>
+    <div class="countdown-box" style="background:rgba(220,38,38,.15);border-color:rgba(220,38,38,.3);margin:20px auto 28px;"><span class="countdown-label" style="color:#FCA5A5;">Same-day funding cutoff in:</span><span class="countdown-timer" id="cd2" style="color:#FCA5A5;">14:59</span></div><br>
+    <a href="https://go.mypartner.io/business-financing/?ref=001Qk00000cbKzZIAU" data-rok target="_blank" rel="noopener" class="btn btn--green btn--pulse" style="font-size:20px;">Continue My Application — Free →</a>
     <div style="display:flex;justify-content:center;gap:18px;margin-top:20px;flex-wrap:wrap;">
       <span style="font-size:12px;color:rgba(255,255,255,.45);">✓ No credit check</span>
       <span style="font-size:12px;color:rgba(255,255,255,.45);">✓ 90 seconds</span>
       <span style="font-size:12px;color:rgba(255,255,255,.45);">✓ Free forever</span>
       <span style="font-size:12px;color:rgba(255,255,255,.45);">✓ No obligation</span>
     </div>
-    <p style="font-size:12px;color:rgba(255,255,255,.2);margin-top:28px;">If you leave this page, your matched offers will be reassigned to the next qualified applicants.</p>
   </div>
 </section>
 
 <!-- STICKY BAR -->
 <div class="sticky-bar">
   <span class="dot dot--red"></span>
-  <span class="bold" style="font-size:14px;">2 offers found</span>
-  <span class="small-text">— expires <span id="cd3" style="font-family:'Fraunces',serif;font-weight:800;font-size:15px;color:var(--red);">14:59</span></span>
-  <a href="https://go.mypartner.io/business-financing/?ref=001Qk00000cbKzZIAU" target="_blank" rel="noopener" class="sticky-bar__btn">Unlock Now →</a>
+  <span class="bold" style="font-size:14px;">1 lender matched</span>
+  <span class="small-text">— cutoff in <span id="cd3" style="font-family:'Fraunces',serif;font-weight:800;font-size:15px;color:var(--red);">14:59</span></span>
+  <a href="https://go.mypartner.io/business-financing/?ref=001Qk00000cbKzZIAU" data-rok target="_blank" rel="noopener" class="sticky-bar__btn">Continue →</a>
 </div>
 
 </div><!-- end #offers-phase -->
@@ -270,7 +271,7 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
     <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20320%2060%22%20width%3D%22320%22%20height%3D%2260%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22gW%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%232D8C6E%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2334C094%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20x%3D%220%22%20y%3D%222%22%20width%3D%2252%22%20height%3D%2252%22%20rx%3D%2214%22%20fill%3D%22%23FFFFFF%22%2F%3E%3Cpath%20d%3D%22M16%2015%20L16%2039%20L36%2039%22%20stroke%3D%22url%28%23gW%29%22%20stroke-width%3D%227%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Ccircle%20cx%3D%2236%22%20cy%3D%2220%22%20r%3D%225%22%20fill%3D%22%2334C094%22%2F%3E%3Ctext%20x%3D%2265%22%20y%3D%2242%22%20font-family%3D%22system-ui%2C-apple-system%2Csans-serif%22%20font-size%3D%2232%22%20font-weight%3D%22800%22%20letter-spacing%3D%22-1%22%3E%3Ctspan%20fill%3D%22%23FFFFFF%22%3ELendi%3C%2Ftspan%3E%3Ctspan%20fill%3D%22%23FFFFFF%22%3Ehub%3C%2Ftspan%3E%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Lendi Hub" class="footer__logo">
     <div class="footer__links"><a href="#">Privacy Policy</a><a href="#">Terms</a><a href="#">Contact</a></div>
     <div class="footer__legal">
-      <p><strong>Important Disclosures:</strong> Lendihub is not a lender and does not make credit decisions. We are a free online marketplace that connects consumers with lending partners in our network. Not all consumers will qualify for a loan or the lowest advertised rate.</p>
+      <p><strong>Important Disclosures:</strong> Lendihub is not a lender and does not make credit decisions. We are a free online marketplace that connects consumers with lending partners in our network. Not all consumers will qualify for a loan or the lowest advertised rate. Rates, amounts and terms shown by any lending partner are determined by that partner after its own review, and being matched is not an approval or an offer of credit.</p>
       <p>When you check your options through Lendihub, we do not perform any credit inquiry. If you formally apply with a specific lender, that lender may perform a credit inquiry as part of their own process.</p>
       <p>Lendihub may be compensated by lenders in its network when a consumer is matched or completes an application.</p>
     </div>
@@ -279,15 +280,153 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
 </footer>
 
 <script>
+/* ============================================================
+   ROK FINANCIAL HANDOFF — passes the funnel answers through
+   ============================================================
+   HOW IT WORKS
+   1. LeadProsper's dynamic redirect sends the visitor here with
+      the answers in the query string. The param names come from
+      the redirect URL you build inside LeadProsper, using its
+      field tokens.
+   2. This script reads those params and rewrites every ROK link
+      on the page so the answers ride along to ROK's form.
+
+   TO CONFIGURE  ->  edit the "rok:" values below.
+   - "from" = the param names we ACCEPT coming in. Already set to
+     the exact field names in your LeadProsper mapping, plus
+     common aliases, so it works either way. Leave it alone.
+   - "rok"  = the param name ROK's form expects. THIS IS THE PART
+     THAT NEEDS CONFIRMING. Open the ROK page, right-click a
+     field, Inspect, and read its name="..." attribute. Put that
+     value in "rok". Wrong names never break the link, they just
+     silently fail to prefill.
+
+   TO TEST
+   Add ?debug=1 to this page's URL. A panel appears at the bottom
+   showing exactly what arrived and exactly what gets sent on.
+   ============================================================ */
+!function(){
+  "use strict";
+
+  var MAP = [
+    // rok: what ROK's form expects  |  from: what we accept coming in
+    { rok:"first_name",      from:["first_name","firstname","fname"] },
+    { rok:"last_name",       from:["last_name","lastname","lname"] },
+    { rok:"email",           from:["email","email_address"] },
+    { rok:"phone",           from:["phone","phone_number","mobile_phone"] },
+    { rok:"business_name",   from:["business_name","company","company_name"] },
+    { rok:"state",           from:["state","business_state"] },
+    { rok:"industry",        from:["industry","business_category"] },
+    { rok:"time_in_business",from:["time_in_business","tib"] },
+    { rok:"loan_amount",     from:["requested_loan_amount","loan_amount"] },
+    { rok:"credit_score",    from:["estimated_credit_score","credit_score"] },
+    { rok:"business_entity", from:["business_legal_structure","business_type"] },
+    { rok:"use_of_funds",    from:["Reason_for_funding","reason_for_funding","reasons_for_fund"] }
+  ];
+
+  // Tracking params forwarded as-is, so ROK reporting stays attributed.
+  var PASSTHROUGH = ["utm_source","utm_medium","utm_campaign","utm_content",
+                     "utm_term","fbclid","gclid","ttclid","msclkid",
+                     "lead_id","subid","sub_id","aff_id"];
+
+  var IN, sent = {}, missing = [];
+  try { IN = new URLSearchParams(window.location.search); }
+  catch(e){ IN = null; }
+
+  function get(k){
+    if(!IN) return "";
+    var v = IN.get(k);
+    return (v === null || v === undefined) ? "" : String(v).trim();
+  }
+
+  function buildUrl(base){
+    if(!IN) return base;
+    var u;
+    try { u = new URL(base, window.location.origin); }
+    catch(e){ return base; }
+
+    // 1. mapped answers — first alias that carries a value wins
+    MAP.forEach(function(row){
+      var v = "";
+      for(var i = 0; i < row.from.length && !v; i++){ v = get(row.from[i]); }
+      if(v){ u.searchParams.set(row.rok, v); sent[row.rok] = v; }
+      else if(missing.indexOf(row.rok) === -1){ missing.push(row.rok); }
+    });
+
+    // 2. ROK's form asks for ANNUAL sales; our funnel captures MONTHLY.
+    //    Convert so the field lands in the right units.
+    var monthly = get("monthly_revenue") || get("monthly_business_revenue");
+    if(monthly){
+      var n = parseFloat(monthly.replace(/[^0-9.]/g, ""));
+      if(isFinite(n) && n > 0){
+        var annual = Math.round(n * 12);
+        u.searchParams.set("annual_sales", annual);
+        sent["annual_sales"] = annual + "  (" + n + " monthly x 12)";
+      }
+    }
+
+    // 3. tracking passthrough
+    PASSTHROUGH.forEach(function(k){
+      var v = get(k);
+      if(v){ u.searchParams.set(k, v); sent[k] = v; }
+    });
+
+    return u.toString();
+  }
+
+  // Rewrite every ROK link on the page.
+  var links = document.querySelectorAll("a[data-rok]");
+  for(var i = 0; i < links.length; i++){
+    links[i].href = buildUrl(links[i].getAttribute("href"));
+  }
+
+  // ---- debug panel: append &debug=1 to this page's URL ----
+  if(get("debug") === "1"){
+    var finalUrl = links.length ? links[0].href : "(no ROK links found)";
+    var rows = "";
+    if(IN){
+      IN.forEach(function(v,k){
+        if(k !== "debug") rows += "<tr><td>" + k + "</td><td>" + v + "</td></tr>";
+      });
+    }
+    if(!rows) rows = "<tr><td colspan='2' class='miss'>Nothing arrived. " +
+      "Turn on \"Include Form Data in URL\" on the LeadCapture Thank You step redirect.</td></tr>";
+
+    var outRows = "";
+    Object.keys(sent).forEach(function(k){
+      outRows += "<tr><td>" + k + "</td><td>" + sent[k] + "</td></tr>";
+    });
+    if(!outRows) outRows = "<tr><td colspan='2' class='miss'>Nothing mapped.</td></tr>";
+
+    var missRow = missing.length
+      ? "<p class='miss' style='margin:10px 0 0'>Expected but not received: " + missing.join(", ") + "</p>"
+      : "";
+
+    var d = document.createElement("div");
+    d.id = "lh-debug";
+    d.innerHTML =
+      "<h4>1. RECEIVED from LeadCapture</h4><table>" + rows + "</table>" + missRow +
+      "<h4 style='margin-top:14px'>2. SENT to Rok Financial</h4><table>" + outRows + "</table>" +
+      "<h4 style='margin-top:14px'>3. FINAL ROK URL</h4><p class='u'>" + finalUrl + "</p>";
+    document.body.appendChild(d);
+    // Skip the loading animation while debugging.
+    var lp = document.getElementById("loading-phase");
+    var op = document.getElementById("offers-phase");
+    if(lp) lp.style.display = "none";
+    if(op) op.style.display = "block";
+  }
+}();
+
 // === LOADING ANIMATION ===
 !function(){
+  if(new URLSearchParams(window.location.search).get("debug") === "1") return;
   var steps=[
     {text:"Connecting to lender network...",pct:12,t:800},
     {text:"Scanning 75+ lending partners...",pct:30,t:1800},
     {text:"Matching your business profile...",pct:50,t:2800},
-    {text:"Evaluating available offers...",pct:72,t:3800},
+    {text:"Evaluating available options...",pct:72,t:3800},
     {text:"Comparing rates and terms...",pct:90,t:4800},
-    {text:"Offers found!",pct:100,t:5800}
+    {text:"Match found!",pct:100,t:5800}
   ];
   var bar=document.getElementById("scan-bar");
   var st=document.getElementById("scan-status");
@@ -307,9 +446,9 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
         ci.appendChild(r);
       }
       if(i===steps.length-1){
-        st.textContent="We found 2 matches!";
+        st.textContent="We found your match!";
         st.style.color="var(--green)";
-        ss.textContent="Preparing your offers...";
+        ss.textContent="Preparing your application...";
         setTimeout(function(){
           lp.style.opacity="0";
           setTimeout(function(){
@@ -325,10 +464,6 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
 
 // === COUNTDOWN ===
 !function(){var t=899,e=["cd1","cd2","cd3"];setInterval(function(){if(t>0){t--;var n=Math.floor(t/60),o=t%60,r=n+":"+(o<10?"0":"")+o;e.forEach(function(t){var e=document.getElementById(t);e&&(e.textContent=r)})}},1e3)}();
-
-// === BACK BUTTON PREVENTION ===
-history.pushState(null,null,location.href);
-window.addEventListener("popstate",function(){history.pushState(null,null,location.href)});
 </script>
 
 </body>
