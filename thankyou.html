@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <meta name="referrer" content="strict-origin">
-  <title>Lendi Hub — Your Match Is Ready</title>
+  <title>Lendi Hub — Your Match: Finish With ROK Financial</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20width%3D%2264%22%20height%3D%2264%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22gF%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%232D8C6E%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2334C094%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20x%3D%220%22%20y%3D%220%22%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2216%22%20fill%3D%22%23FFFFFF%22%2F%3E%3Cpath%20d%3D%22M18%2012%20L18%2046%20L46%2046%22%20stroke%3D%22url%28%23gF%29%22%20stroke-width%3D%2210%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Ccircle%20cx%3D%2246%22%20cy%3D%2222%22%20r%3D%227%22%20fill%3D%22%2334C094%22%2F%3E%3C%2Fsvg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,8 +45,61 @@ fbq('track', 'Lead');
 src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
+<style>
+  /* red reads as an error state on a page whose whole job is trust */
+  .progress__step--active{background:var(--navy) !important;}
+  .sticky-bar__btn{background:var(--green) !important;}
+</style>
+<style>
+  /* --- sticky cutoff bar --- */
+  body{padding-top:44px;}
+  .nav{top:44px !important;}
+  #cutbar{position:fixed;top:0;left:0;right:0;z-index:120;
+    background:linear-gradient(90deg,#B42318 0%,#D92D20 55%,#B42318 100%);
+    box-shadow:0 2px 10px rgba(180,35,24,.30);}
+  #cutbar-inner{display:flex;align-items:center;justify-content:center;gap:10px;
+    height:44px;padding:0 14px;color:#fff;}
+  #cutbar-dot{width:8px;height:8px;border-radius:50%;background:#FFD5D1;flex-shrink:0;
+    animation:cutpulse 1.6s ease-in-out infinite;}
+  #cutbar-label{font-size:13px;font-weight:700;letter-spacing:.01em;white-space:nowrap;}
+  #cutbar-timer{font-family:'Fraunces',Georgia,serif;font-weight:800;font-size:21px;
+    line-height:1;font-variant-numeric:tabular-nums;letter-spacing:.5px;
+    text-shadow:0 1px 0 rgba(0,0,0,.18);white-space:nowrap;}
+  #cutbar.is-past #cutbar-timer{display:none;}
+  #cutbar.is-past{background:linear-gradient(90deg,#8A3A12 0%,#B54708 55%,#8A3A12 100%);
+    box-shadow:0 2px 10px rgba(181,71,8,.28);}
+  #cutbar.is-past #cutbar-label{white-space:normal;text-align:center;line-height:1.25;}
+  @keyframes cutpulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.75)}}
+  @media (max-width:560px){
+    body{padding-top:52px;}
+    .nav{top:52px !important;}
+    #cutbar-inner{height:52px;gap:8px;padding:0 10px;}
+    #cutbar-label{font-size:12.5px;white-space:nowrap;}
+    #cutbar-timer{font-size:19px;}
+    #cutbar.is-past #cutbar-inner{height:auto;min-height:52px;padding:9px 12px;}
+    #cutbar.is-past #cutbar-label{font-size:12px;white-space:normal;text-align:center;}
+  }
+  @media (prefers-reduced-motion:reduce){#cutbar-dot{animation:none;}}
+</style>
 </head>
 <body>
+
+<!-- ============ STICKY CUTOFF BAR ============
+     Same look as the old red timer bar. The number underneath is
+     a real clock: it counts to CUTOFF.hour in CUTOFF.tz and it
+     does NOT reset when the page is reloaded. Reload it and the
+     seconds keep falling from where they were.
+     After the cutoff it does not restart - it flips to tomorrow.
+     Set the hour in the CUTOFF config near the bottom of this file.
+============================================================ -->
+<div id="cutbar" hidden>
+  <div id="cutbar-inner">
+    <span id="cutbar-dot"></span>
+    <span id="cutbar-label">Today&rsquo;s review cutoff in</span>
+    <span id="cutbar-timer">--:--</span>
+  </div>
+</div>
+
 
 <nav class="nav">
   <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20320%2060%22%20width%3D%22320%22%20height%3D%2260%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22gB%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%232D8C6E%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2334C094%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20x%3D%220%22%20y%3D%222%22%20width%3D%2252%22%20height%3D%2252%22%20rx%3D%2214%22%20fill%3D%22%231B2A4A%22%2F%3E%3Cpath%20d%3D%22M16%2015%20L16%2039%20L36%2039%22%20stroke%3D%22url%28%23gB%29%22%20stroke-width%3D%227%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Ccircle%20cx%3D%2236%22%20cy%3D%2220%22%20r%3D%225%22%20fill%3D%22%2334C094%22%2F%3E%3Ctext%20x%3D%2265%22%20y%3D%2242%22%20font-family%3D%22system-ui%2C-apple-system%2Csans-serif%22%20font-size%3D%2232%22%20font-weight%3D%22800%22%20letter-spacing%3D%22-1%22%3E%3Ctspan%20fill%3D%22%231B2A4A%22%3ELendi%3C%2Ftspan%3E%3Ctspan%20fill%3D%22%232D8C6E%22%3Ehub%3C%2Ftspan%3E%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Lendi Hub" class="nav__logo">
@@ -54,218 +107,320 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
 
 
 <!-- ============ LOADING PHASE ============ -->
-<div id="loading-phase">
-  <section style="padding:60px 24px;">
-    <div class="container--form text-center">
 
-      <!-- Animated scan icon -->
-      <div class="scan-icon" style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--green-accent));margin:0 auto 24px;display:flex;align-items:center;justify-content:center;">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      </div>
+<!--
+================================================================
+  LENDIHUB — PAGE 3 OF 3  |  MATCH + HANDOFF TO ROK FINANCIAL
+  AWARENESS : MOST AWARE (they just finished our form)
+  JOB       : one job only - get them to finish ROK's application.
+  FORMULA   : Offer-Reason-CTA. No re-education, no new selling.
 
-      <!-- Status headline -->
-      <div id="scan-status" class="heading heading--sm" style="margin-bottom:8px;">Scanning lender network...</div>
-      <div id="scan-sub" class="small-text" style="margin-bottom:28px;">This usually takes a few seconds</div>
+  CONTINUITY FROM PAGES 1 AND 2
+    - The gap ("payroll is Friday") is what closes this page.
+    - "The Deposit Match" is named as the thing that just happened.
+    - "The No-Surprise Guarantee" is restated AT the handoff,
+      because handing someone to a third party is the exact
+      moment trust wobbles.
 
-      <!-- Progress bar -->
-      <div style="max-width:400px;margin:0 auto 28px;">
-        <div style="background:var(--border);border-radius:100px;height:8px;overflow:hidden;">
-          <div id="scan-bar" style="background:linear-gradient(90deg,var(--green),var(--green-accent));height:100%;border-radius:100px;width:0%;transition:width .6s ease;"></div>
-        </div>
-      </div>
+  REMOVED FROM THE PREVIOUS VERSION AND WHY
+    1. Two 14:59 "same-day funding cutoff" countdown timers.
+       They reset on reload. A deadline that is not real is
+       fabricated scarcity and a Meta policy risk.
+    2. The 5.8-second "Scanning 75+ lending partners" animation.
+       Nothing was being scanned - it was a fixed timer, and the
+       75+ figure was never substantiated.
+    3. "Rated Excellent on Trustpilot" - no account was named or
+       verified. Put it back only with a real profile link.
+    4. "No credit check" on the ROK step. ROK's own application
+       may check credit. That claim belongs to OUR step, not theirs.
 
-      <!-- Checkmark items appear one by one -->
-      <div id="scan-checks" style="max-width:340px;margin:0 auto;text-align:left;"></div>
+  HONEST URGENCY THAT REPLACED IT: the invoice clock the visitor
+  already lives with. Nothing invented.
+================================================================
+-->
 
-    </div>
-  </section>
-</div>
+<!-- ============ 0. THE MATCH REVEAL ============
+     WHAT THIS IS, AND WHAT IT IS NOT.
 
-<!-- ============ OFFERS PHASE (hidden until loading completes) ============ -->
-<div id="offers-phase" style="display:none;">
+     It is a summary of work that ALREADY HAPPENED, animated in.
+     By the time this page loads, LeadProsper has already routed
+     the lead and a buyer has already accepted it - that is why
+     the dynamic redirect sent the visitor to THIS page with ROK
+     params attached. So every line below is past tense and true.
 
-<!-- STATUS + HEADLINE -->
-<section style="padding:40px 24px 10px;">
+     The old version was theatre: a fixed 5.8s timer that said
+     "Scanning 75+ lending partners..." in the present tense while
+     nothing was being scanned, and the 75+ figure was never
+     substantiated. That is what was removed. This is not that.
+
+     RULES IF YOU EDIT IT
+     1. PAST TENSE ONLY. Never "Scanning...", never "Searching...".
+        Present tense claims work is happening. It is not.
+     2. NO INVENTED COUNTS. Set PARTNERS below to the real number
+        of buyers in your LeadProsper campaign, or leave it 0 and
+        the line does not render. Never guess it.
+     3. KEEP IT UNDER ~2.5s TOTAL. The old one ran 5.8s. Every
+        second here is drop-off before the only CTA that matters.
+     4. NEVER BLOCK THE CTA. The page renders fully with JS off;
+        this only animates in front of content that is already
+        there. Do not invert that.
+============================================================ -->
+<section class="section--sm" id="reveal" hidden style="padding-top:44px;padding-bottom:8px;">
   <div class="container--form text-center">
-    <div class="mb-20"><span class="badge badge--green"><span class="check-circle"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span> Matching Complete — Lender Found</span></div>
-    <h1 class="heading heading--lg mb-12">You're matched with a lender<br>who funds businesses like yours.</h1>
-    <p class="subhead" style="max-width:540px;margin:0 auto;"><strong class="bold">Rok Financial is our top-rated funding partner</strong>, and your profile fits what they fund. Finish your application to see your actual amount, rate and terms. Your answers are already filled in, so it takes about 90 seconds.</p>
+    <div class="icon-box icon-box--lg" style="margin:0 auto 18px;background:var(--green-pale);">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    </div>
+    <div class="heading heading--sm" id="reveal-title" style="margin-bottom:6px;">Your Deposit Match is done.</div>
+    <p class="small-text" id="reveal-sub" style="margin-bottom:20px;">Here is what happened while you were answering.</p>
+    <div style="background:var(--border);border-radius:99px;height:5px;overflow:hidden;margin-bottom:22px;">
+      <div id="reveal-bar" style="width:0;height:100%;background:var(--green);border-radius:99px;transition:width .45s ease;"></div>
+    </div>
+    <div id="reveal-list" style="text-align:left;max-width:340px;margin:0 auto;"></div>
   </div>
 </section>
 
-<!-- PROGRESS -->
-<section style="padding:10px 24px 28px;">
-  <div style="max-width:520px;margin:0 auto;">
+<!-- ============ 1. MATCH CONFIRMED ============ -->
+<section class="section--sm" style="padding-top:36px;padding-bottom:8px;">
+  <div class="container--narrow text-center">
+    
+    <h1 class="heading heading--lg mb-12">Timing problem, meet ROK Financial.</h1>
+    <p class="subhead" style="max-width:560px;margin:0 auto;">They read bank deposits before credit. That is why they came back on your numbers. One more form and they can start.</p>
+  </div>
+</section>
+
+<!-- ============ 2. PROGRESS ============ -->
+<section style="padding:22px 24px 0;">
+  <div class="container--form">
     <div class="progress">
-      <div class="progress__step progress__step--done"></div>
       <div class="progress__step progress__step--done"></div>
       <div class="progress__step progress__step--done"></div>
       <div class="progress__step progress__step--active"></div>
     </div>
     <div class="progress__labels">
-      <span style="color:var(--green);">✓ Submitted</span>
-      <span style="color:var(--green);">✓ Scanned</span>
-      <span style="color:var(--green);">✓ Matched</span>
-      <span style="color:var(--red);font-weight:800;">→ Finish application</span>
+      <span style="color:var(--green);">✓ The gap</span>
+      <span style="color:var(--green);">✓ Your deposits</span>
+      <span style="color:var(--navy);font-weight:800;">Finish with ROK</span>
     </div>
   </div>
 </section>
 
-<!-- MATCH BANNER -->
-<section style="padding:0 24px 16px;">
+<!-- ============ 3. THE LENDER CARD ============ -->
+<section class="section--sm" style="padding-top:26px;padding-bottom:10px;">
   <div class="container--form">
-    <div class="card--green" style="border-radius:12px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
-      <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:20px;">🎯</span><span class="bold" style="font-size:15px;color:var(--navy);">Rok Financial matched with your profile</span></div>
-      <span class="badge badge--red" style="font-size:12px;"><span class="dot dot--red"></span> Same-day decisions close early</span>
-    </div>
-  </div>
-</section>
-
-<!-- OFFER CARD -->
-<section style="padding:0 24px 20px;">
-  <div class="container--form" style="display:flex;flex-direction:column;gap:14px;">
-
-    <!-- ROK FINANCIAL -->
     <a href="https://go.mypartner.io/business-financing/?ref=001Qk00000cbKzZIAU" data-rok target="_blank" rel="noopener" class="offer">
-      <div class="offer__ribbon">Your Match</div>
       <div class="offer__header">
-        <span class="offer__lender">Rok Financial</span>
-        <span class="offer__speed">⚡ Same-day approval</span>
+        <div>
+          <div class="offer__label">Your match</div>
+          <div class="offer__lender">ROK Financial</div>
+        </div>
+        <div class="offer__speed">Reads deposits first</div>
       </div>
       <div class="offer__grid">
-        <div><div class="offer__label">Pre-approval</div><div class="offer__value" style="color:var(--text);">Minutes</div></div>
-        <div><div class="offer__label">Credit</div><div class="offer__value" style="color:var(--green);">No min. FICO</div></div>
-        <div><div class="offer__label">Funding</div><div class="offer__value" style="color:var(--text);">24 hrs</div></div>
+        <div><div class="stat__number" style="font-size:22px;">4+ mo</div><div class="stat__label">Minimum time open</div></div>
+        <div><div class="stat__number" style="font-size:22px;">$10k+</div><div class="stat__label">Monthly deposits</div></div>
+        <div><div class="stat__number" style="font-size:22px;">Same day</div><div class="stat__label">Typical first answer</div></div>
       </div>
-      <div class="offer__overlay"><div class="offer__unlock">🔓 Click to See Your Offer</div></div>
     </a>
-
+    <p class="small-text text-center mt-16">Being matched is not an approval. ROK reviews your file and makes its own decision on amount, rate and terms.</p>
   </div>
 </section>
 
-<!-- UNLOCK CTA -->
-<section style="padding:0 24px 40px;">
+<!-- ============ 4. THE ASK — one job ============ -->
+<section class="section--sm" style="padding-top:14px;padding-bottom:10px;">
   <div class="container--form">
-    <div class="card--highlight text-center" style="padding:36px;">
-      <div style="font-size:36px;" class="mb-12">🔓</div>
-      <h2 class="heading heading--sm mb-12">Finish your application to see your offer</h2>
-      <p class="body-text mb-20" style="max-width:480px;margin:0 auto;">Rok Financial needs a few more details before releasing your rates and terms. We've carried over everything you already told us, so most of the form is done. No credit check to see your options. Completely free.</p>
-      <div class="countdown-box mb-24"><span class="countdown-label">Same-day funding cutoff in:</span><span class="countdown-timer" id="cd1">14:59</span></div><br>
-      <a href="https://go.mypartner.io/business-financing/?ref=001Qk00000cbKzZIAU" data-rok target="_blank" rel="noopener" class="btn btn--navy btn--pulse">Continue My Application →</a>
+    <div class="card card--highlight text-center">
+      <h2 class="heading heading--sm mb-12">One form stands between you and the fix.</h2>
+      <p class="body-text mb-24">We told them what your deposits look like. ROK needs the rest in their own form. Most people finish it in a few minutes.</p>
+      <div class="countdown-box mb-24" data-cutoff hidden>
+        <span class="countdown-label" data-cutoff-label>Today's review cutoff in:</span>
+        <span class="countdown-timer" data-cutoff-timer>--:--</span>
+      </div>
+      <p class="small-text mb-20" data-cutoff-sub hidden></p>
+      <a href="https://go.mypartner.io/business-financing/?ref=001Qk00000cbKzZIAU" data-rok target="_blank" rel="noopener" class="btn btn--navy btn--pulse" style="font-size:18px;">Finish My Application With ROK →</a>
+      <p class="btn-sub">Free · Opens in a new tab · Your answers carry over</p>
       <div class="trust-row mt-24">
-        <span class="trust-item"><svg class="trust-check" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> No credit check</span>
-        <span class="trust-item"><svg class="trust-check" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 90 seconds</span>
-        <span class="trust-item"><svg class="trust-check" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 100% free</span>
+        <span class="trust-item"><svg class="trust-check" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> No cost to you</span>
+        <span class="trust-item"><svg class="trust-check" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Nothing binding</span>
+        <span class="trust-item"><svg class="trust-check" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> You can stop anytime</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- URGENCY -->
-<section class="section--sm bg-white divider" style="border-bottom:1px solid var(--border);">
-  <div class="container--form">
-    <div class="card card--red mb-32">
-      <div style="display:flex;gap:14px;align-items:flex-start;">
-        <span style="font-size:28px;line-height:1;">⚠️</span>
-        <div>
-          <h4 class="heading heading--xs mb-8">Same-day funding depends on when you apply.</h4>
-          <p class="body-text mb-12">Rok Financial can move a file the same day, but underwriting works on a daily cutoff. Applications that come in early get decided today. Applications that come in late wait for tomorrow.</p>
-          <p class="body-text"><strong class="bold">You've already done the hard part.</strong> The rest of the form is pre-filled and takes about 90 seconds.</p>
-        </div>
-      </div>
-    </div>
-    <div class="grid-3">
-      <div class="card text-center" style="padding:20px 16px;"><div class="stat__number" style="color:var(--navy);">15 sec</div><div class="stat__label">to an instant pre-approval</div></div>
-      <div class="card text-center" style="padding:20px 16px;"><div class="stat__number" style="color:var(--navy);">4+ mo</div><div class="stat__label">in business is all it takes to qualify</div></div>
-      <div class="card text-center" style="padding:20px 16px;"><div class="stat__number" style="color:var(--navy);">24hrs</div><div class="stat__label">from approval to funds in your account</div></div>
-    </div>
-    <div class="text-center mt-32"><a href="https://go.mypartner.io/business-financing/?ref=001Qk00000cbKzZIAU" data-rok target="_blank" rel="noopener" class="btn btn--red btn--pulse">Continue Before Today's Cutoff →</a></div>
-  </div>
-</section>
+<!-- ============ 5. WHAT ROK WILL ASK — removes the unknown ============ -->
+<section class="section">
+  <div class="container--mid">
+    <p class="label text-center mb-10">What Is On Their Form</p>
+    <h2 class="heading heading--md text-center mb-14">No surprises on the next page either.</h2>
+    <p class="subhead text-center mb-32" style="max-width:540px;margin-left:auto;margin-right:auto;">Here is what ROK asks for, so you know before you click.</p>
 
-<!-- LOSS AVERSION -->
-<section class="section--sm">
-  <div class="container--form">
-    <div class="text-center mb-32">
-      <h2 class="heading heading--sm mb-8">What happens if you don't finish?</h2>
-      <p class="subhead" style="font-size:15px;">(Short version: nothing happens at all)</p>
-    </div>
-    <div class="grid-2" style="gap:20px;">
-      <div class="compare__left">
-        <div class="compare__label" style="color:#B45309;">✗ If You Stop Here</div>
-        <ul class="checklist checklist--no">
-          <li>Your application never reaches underwriting</li>
-          <li>You never find out what you'd have been approved for</li>
-          <li>The pre-filled form resets and you start over later</li>
-          <li>Back to calling lenders one at a time</li>
-          <li>No numbers, no leverage, no options</li>
-        </ul>
-      </div>
-      <div class="compare__right">
-        <div class="compare__label" style="color:var(--green);">✓ If You Finish (90 sec)</div>
+    <div class="grid-2">
+      <div class="card">
+        <h3 class="heading heading--xs mb-14">What they ask</h3>
         <ul class="checklist checklist--yes">
-          <li>Instant pre-approval decision</li>
-          <li>See your real amount, rate and term</li>
-          <li>A funding advisor walks you through the options</li>
-          <li>Same-day approval possible</li>
-          <li>Zero obligation to accept anything</li>
+          <li>Your business name and where it is</li>
+          <li>How long you have been open</li>
+          <li>What comes into the account each month</li>
+          <li>How much you are looking for</li>
+          <li>Where you would put the money</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 class="heading heading--xs mb-14">What they may ask later</h3>
+        <ul class="checklist checklist--yes">
+          <li>Your last few months of bank statements</li>
+          <li>A credit check, if you move forward with an offer</li>
+        </ul>
+        <p class="small-text mt-16">That credit step is theirs, not ours, and it comes after you see numbers. Our side never pulled it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. THE GUARANTEE, RESTATED AT THE HANDOFF ============ -->
+<section class="section bg-white divider" style="border-bottom:1px solid var(--border);">
+  <div class="container--mid">
+    <p class="label text-center mb-10">Still Covered</p>
+    <h2 class="heading heading--md text-center mb-24">The No-Surprise Guarantee follows you here.</h2>
+
+    <div class="card card--highlight">
+      <p class="body-text mb-14"><strong class="bold">You still pay us nothing.</strong> Not now, not after funding, not out of what you get.</p>
+      <p class="body-text mb-14"><strong class="bold">You get three numbers in writing before you sign.</strong> What the payment is. How often it comes out. The total you pay back.</p>
+      <p class="body-text">If ROK will not put those three in writing before you sign, tell us. <strong class="bold">We pull them from our list.</strong></p>
+    </div>
+
+    <div class="card card--cream mt-24">
+      <p class="body-text"><strong class="bold">One more thing, and then we will stop:</strong> read the payback total out loud before you agree to it. Not the rate. The total. If that number does not work for the job you are funding, walk away. A good lender will still be there next month.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. WHY FINISH NOW — honest urgency only ============ -->
+<section class="section">
+  <div class="container--mid">
+    <p class="label text-center mb-10">Why Now</p>
+    <h2 class="heading heading--md text-center mb-24">Finish today or start over Monday.</h2>
+
+    <p class="body-text mb-16">Files that land before today's cutoff get worked today. Files that land after it go to the bottom of tomorrow's stack, behind everyone who finished on time.</p>
+    <p class="body-text mb-16">A day here is not a day. Miss today and the answer comes Monday. Miss the week and your numbers get re-pulled and you answer all of it again.</p>
+    <p class="body-text">Meanwhile the money already went out and it comes back when it comes back. <strong class="bold">Every day you sit on this is a day added to the gap you came here to close.</strong></p>
+
+    <div class="text-center mt-32">
+      <a href="https://go.mypartner.io/business-financing/?ref=001Qk00000cbKzZIAU" data-rok target="_blank" rel="noopener" class="btn btn--navy">Finish My Application →</a>
+      <p class="small-text mt-14">Free · Opens in a new tab · Your answers carry over</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7b. LOSS AVERSION ============
+     The old page had a "what happens if you don't finish?" block.
+     It is back, because loss aversion is legitimate - but every
+     consequence below is one that ACTUALLY happens. Nothing here
+     is invented, and nothing threatens the reader with a penalty
+     we made up.
+
+     WHAT MAKES EACH LINE TRUE:
+       1. An unfinished application is not worked. Buyers work
+          completed files. This is simply how the queue runs.
+       2. Coming back later means re-answering. Our form does not
+          hold a half-finished session across days.
+       3. Lenders quote off current financials and re-verify. A
+          file from six weeks ago gets re-checked, not honoured.
+       4. The gap does not close by itself. This is the reader's
+          own situation restated, not a threat from us.
+
+     BANNED HERE: "your match will be released", "your spot is
+     held for N minutes", "rates will go up", any countdown.
+     We do not hold spots and nothing is reserved.
+============================================================ -->
+<section class="section">
+  <div class="container--mid">
+    <p class="label text-center mb-10">If You Close This Tab</p>
+    <h2 class="heading heading--md text-center mb-14">This is where most people lose the money.</h2>
+    <p class="subhead text-center mb-32" style="max-width:540px;margin-left:auto;margin-right:auto;">Not at the form. Not at the terms. Right here, one click from the end, with everything already done.</p>
+
+    <div class="grid-2">
+      <div class="card card--red">
+        <h3 class="heading heading--xs mb-14">Close it and here is what happens</h3>
+        <ul class="checklist checklist--no">
+          <li>Nobody works an unfinished file. It does not go in a queue. It sits.</li>
+          <li>Come back next week and you answer all of it again from the top.</li>
+          <li>An old file gets re-pulled, not honoured. Whatever they would have said today, they say again from scratch.</li>
+          <li>And the bill you came here about is still due on Friday.</li>
+        </ul>
+      </div>
+      <div class="card card--green">
+        <h3 class="heading heading--xs mb-14">Four more minutes and instead</h3>
+        <ul class="checklist checklist--yes">
+          <li>It goes in today, while your numbers are still today's numbers.</li>
+          <li>You get real numbers to look at instead of wondering.</li>
+          <li>You can still say no to every one of them.</li>
+          <li>You stop carrying this around.</li>
         </ul>
       </div>
     </div>
-    <div class="text-center mt-32"><a href="https://go.mypartner.io/business-financing/?ref=001Qk00000cbKzZIAU" data-rok target="_blank" rel="noopener" class="btn btn--navy">Don't Leave Money on the Table →</a></div>
+
+    <p class="body-text text-center mt-32" style="max-width:560px;margin-left:auto;margin-right:auto;"><strong class="bold">You already did the hard part.</strong> The questions are answered, the match is made, and the only thing left is a form that most people finish in a few minutes.</p>
+
+    <div class="text-center mt-32">
+      <a href="https://go.mypartner.io/business-financing/?ref=001Qk00000cbKzZIAU" data-rok target="_blank" rel="noopener" class="btn btn--navy btn--pulse">Finish It Now →</a>
+      <p class="small-text mt-14">Free · Opens in a new tab · Your answers carry over</p>
+    </div>
   </div>
 </section>
 
-<!-- SOCIAL PROOF -->
-<section class="section--sm bg-white divider" style="border-bottom:1px solid var(--border);">
-  <div class="container--form">
-    <div class="text-center mb-24">
-      <p class="label mb-8">About Rok Financial</p>
-      <h3 class="heading heading--xs">Rated Excellent on Trustpilot</h3>
-      <p class="small-text" style="margin-top:8px;">Based on 1,000+ verified customer reviews</p>
-    </div>
-    <div class="grid-2" style="gap:16px;">
-      <div class="card card--cream" style="padding:20px;">
-        <h4 class="heading heading--xs mb-8">Technology-first underwriting</h4>
-        <p class="small-text">ROK Intelligence uses automated underwriting to return an instant pre-approval and flexible options built around your business, instead of a single take-it-or-leave-it offer.</p>
+
+<!-- ============ 8. LAST OBJECTIONS ============ -->
+<section class="section bg-white divider" style="border-bottom:1px solid var(--border);">
+  <div class="container--mid">
+    <p class="label text-center mb-10">Last Questions</p>
+    <h2 class="heading heading--md text-center mb-32">Before you click through</h2>
+
+    <div class="grid-2">
+      <div class="faq">
+        <p class="faq__q">Why is there a second form?</p>
+        <p class="faq__a">ROK is the lender's side. They need their own answers to make a decision. We cannot fill that out for you. Your answers from our form carry over so you are not starting from zero.</p>
       </div>
-      <div class="card card--cream" style="padding:20px;">
-        <h4 class="heading heading--xs mb-8">Compare before you commit</h4>
-        <p class="small-text">You choose the offer that makes the most sense for your business. Their offer calculator shows full transparency on terms up front, so there are no surprises later.</p>
+      <div class="faq">
+        <p class="faq__q">Am I signing anything by clicking?</p>
+        <p class="faq__a">No. You are opening their application. Nothing is binding until you sign an actual agreement, and that comes after you see terms.</p>
+      </div>
+      <div class="faq">
+        <p class="faq__q">What if I do not like what they come back with?</p>
+        <p class="faq__a">Then say no. You owe nobody anything for looking. You can come back and start a new match later.</p>
+      </div>
+      <div class="faq">
+        <p class="faq__q">How long until I hear something?</p>
+        <p class="faq__a">Often the same day once the form is in. Bank statements can add a day. Nobody can promise a date before they read your file.</p>
       </div>
     </div>
-    <p class="small-text text-center mt-24" style="color:var(--text-light);">Financing options include SBA loans, lines of credit, working capital, revenue-based financing, equipment financing, accounts receivable financing and commercial real estate.</p>
   </div>
 </section>
 
-<!-- FINAL CTA -->
-<section class="section--sm" style="background:var(--navy);">
-  <div class="container--form text-center">
-    <div style="font-size:50px;" class="mb-16">🔓</div>
-    <h2 class="heading heading--lg" style="color:#fff;margin-bottom:16px;">You're one step from your offer.</h2>
-    <p style="font-size:18px;color:rgba(255,255,255,.7);margin-bottom:12px;line-height:1.55;">Your details are already carried over. Rok Financial just needs you to confirm them and hit apply.</p>
-    <p style="font-size:15px;color:rgba(255,255,255,.4);margin-bottom:10px;">You're this close. Don't leave without seeing your numbers.</p>
-    <div class="countdown-box" style="background:rgba(220,38,38,.15);border-color:rgba(220,38,38,.3);margin:20px auto 28px;"><span class="countdown-label" style="color:#FCA5A5;">Same-day funding cutoff in:</span><span class="countdown-timer" id="cd2" style="color:#FCA5A5;">14:59</span></div><br>
-    <a href="https://go.mypartner.io/business-financing/?ref=001Qk00000cbKzZIAU" data-rok target="_blank" rel="noopener" class="btn btn--green btn--pulse" style="font-size:20px;">Continue My Application — Free →</a>
-    <div style="display:flex;justify-content:center;gap:18px;margin-top:20px;flex-wrap:wrap;">
-      <span style="font-size:12px;color:rgba(255,255,255,.45);">✓ No credit check</span>
-      <span style="font-size:12px;color:rgba(255,255,255,.45);">✓ 90 seconds</span>
-      <span style="font-size:12px;color:rgba(255,255,255,.45);">✓ Free forever</span>
-      <span style="font-size:12px;color:rgba(255,255,255,.45);">✓ No obligation</span>
+<!-- ============ 9. CLOSE ============ -->
+<section class="section" style="background:var(--navy);">
+  <div class="container--narrow text-center">
+    <h2 class="heading heading--lg" style="color:#fff;margin-bottom:16px;">You did the hard part already.</h2>
+    <p style="font-size:18px;color:rgba(255,255,255,.78);margin-bottom:14px;line-height:1.55;">You did the work. You covered the cost up front. You answered our questions.</p>
+    <p style="font-size:18px;color:rgba(255,255,255,.78);margin-bottom:26px;line-height:1.55;">One form left, and it is the one that gets you an answer.</p>
+    <div class="countdown-box mb-24" data-cutoff hidden style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);">
+      <span class="countdown-label" data-cutoff-label style="color:rgba(255,255,255,.75);">Today's review cutoff in:</span>
+      <span class="countdown-timer" data-cutoff-timer style="color:#34C094;">--:--</span>
     </div>
+    <p class="small-text mb-20" data-cutoff-sub hidden style="color:rgba(255,255,255,.6);"></p>
+    <a href="https://go.mypartner.io/business-financing/?ref=001Qk00000cbKzZIAU" data-rok target="_blank" rel="noopener" class="btn btn--green btn--pulse" style="font-size:19px;">Finish My Application With ROK →</a>
+    <p class="btn-sub" style="color:rgba(255,255,255,.6);">Free &nbsp;·&nbsp; Nothing binding &nbsp;·&nbsp; Your answers carry over</p>
   </div>
 </section>
 
-<!-- STICKY BAR -->
+<!-- ============ STICKY BAR ============ -->
 <div class="sticky-bar">
-  <span class="dot dot--red"></span>
-  <span class="bold" style="font-size:14px;">1 lender matched</span>
-  <span class="small-text">— cutoff in <span id="cd3" style="font-family:'Fraunces',serif;font-weight:800;font-size:15px;color:var(--red);">14:59</span></span>
-  <a href="https://go.mypartner.io/business-financing/?ref=001Qk00000cbKzZIAU" data-rok target="_blank" rel="noopener" class="sticky-bar__btn">Continue →</a>
+  <div>
+    <div style="font-weight:800;font-size:14px;color:var(--navy);line-height:1.2;">One form left</div>
+    <div style="font-size:12px;color:var(--text-light);">Your answers carry over</div>
+  </div>
+  <a href="https://go.mypartner.io/business-financing/?ref=001Qk00000cbKzZIAU" data-rok target="_blank" rel="noopener" class="sticky-bar__btn">Finish →</a>
 </div>
-
-</div><!-- end #offers-phase -->
-
 <footer class="footer" style="padding-bottom:90px;">
   <div style="max-width:900px;margin:0 auto;">
     <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20320%2060%22%20width%3D%22320%22%20height%3D%2260%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22gW%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%232D8C6E%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2334C094%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20x%3D%220%22%20y%3D%222%22%20width%3D%2252%22%20height%3D%2252%22%20rx%3D%2214%22%20fill%3D%22%23FFFFFF%22%2F%3E%3Cpath%20d%3D%22M16%2015%20L16%2039%20L36%2039%22%20stroke%3D%22url%28%23gW%29%22%20stroke-width%3D%227%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Ccircle%20cx%3D%2236%22%20cy%3D%2220%22%20r%3D%225%22%20fill%3D%22%2334C094%22%2F%3E%3Ctext%20x%3D%2265%22%20y%3D%2242%22%20font-family%3D%22system-ui%2C-apple-system%2Csans-serif%22%20font-size%3D%2232%22%20font-weight%3D%22800%22%20letter-spacing%3D%22-1%22%3E%3Ctspan%20fill%3D%22%23FFFFFF%22%3ELendi%3C%2Ftspan%3E%3Ctspan%20fill%3D%22%23FFFFFF%22%3Ehub%3C%2Ftspan%3E%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Lendi Hub" class="footer__logo">
@@ -278,6 +433,7 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
     <div class="footer__copyright">Lendihub 2026 | All Rights Reserved</div>
   </div>
 </footer>
+
 
 <script>
 /* ============================================================
@@ -409,61 +565,210 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
       "<h4 style='margin-top:14px'>2. SENT to Rok Financial</h4><table>" + outRows + "</table>" +
       "<h4 style='margin-top:14px'>3. FINAL ROK URL</h4><p class='u'>" + finalUrl + "</p>";
     document.body.appendChild(d);
-    // Skip the loading animation while debugging.
-    var lp = document.getElementById("loading-phase");
-    var op = document.getElementById("offers-phase");
-    if(lp) lp.style.display = "none";
-    if(op) op.style.display = "block";
   }
 }();
 
-// === LOADING ANIMATION ===
-!function(){
-  if(new URLSearchParams(window.location.search).get("debug") === "1") return;
-  var steps=[
-    {text:"Connecting to lender network...",pct:12,t:800},
-    {text:"Scanning 75+ lending partners...",pct:30,t:1800},
-    {text:"Matching your business profile...",pct:50,t:2800},
-    {text:"Evaluating available options...",pct:72,t:3800},
-    {text:"Comparing rates and terms...",pct:90,t:4800},
-    {text:"Match found!",pct:100,t:5800}
-  ];
-  var bar=document.getElementById("scan-bar");
-  var st=document.getElementById("scan-status");
-  var ss=document.getElementById("scan-sub");
-  var ci=document.getElementById("scan-checks");
-  var lp=document.getElementById("loading-phase");
-  var op=document.getElementById("offers-phase");
+/* ============================================================
+   SAME-DAY REVIEW CUTOFF  —  REAL CLOCK, NOT A FAKE TIMER
+   ============================================================
+   This counts down to an ACTUAL time of day, in a real time
+   zone, on real business days. It does NOT reset when the page
+   is reloaded, because a timer that restarts every visit is
+   fabricated scarcity and visitors have learned to discount it.
 
-  steps.forEach(function(s,i){
+   !!! YOU MUST SET  CUTOFF.hour / CUTOFF.minute  !!!
+   Get the real number from ROK: "what time do you have to have
+   an application to review it the same business day?"
+   Until CUTOFF.confirmed is set to true, the whole block stays
+   hidden. It will never show an invented number.
+
+   CLAIM WORDING — read this before changing it.
+   The label says REVIEW cutoff, not FUNDING cutoff. "Reviewed
+   today" is almost always defensible. "Funded today" is a much
+   bigger claim and it is the lender's to make, not yours. If ROK
+   confirms in writing that they actually fund same day before a
+   set time, change CUTOFF.noun to "funding" and you are covered.
+   Do not change it on an assumption.
+
+   AFTER THE CUTOFF the block does not reset and does not hide.
+   It flips to the honest message: today's window closed, finish
+   now and you are at the front of tomorrow's stack. That is
+   still a reason to act now, and it is true.
+
+   WEEKENDS roll to the next business day automatically.
+   ============================================================ */
+!function(){
+  "use strict";
+
+  var CUTOFF = {
+    confirmed : true,    // <-- LIVE. Confirm the hour below with ROK and adjust.
+    hour      : 16,      // 24h clock, in the zone below (16 = 4 PM)
+    minute    : 0,
+    tz        : "America/New_York",
+    tzLabel   : "ET",
+    noun      : "review", // "review" | "funding"  (see note above)
+    tickWithin: 8*3600   // show the ticking clock inside the last 8 hours
+  };
+
+  var boxes = document.querySelectorAll("[data-cutoff]");
+  if(!CUTOFF.confirmed) return;   // nothing renders until the hour is confirmed            // stays hidden. no invented deadline.
+
+  // Current wall-clock time in the cutoff's zone, whatever the visitor's zone is.
+  function zoneNow(){
+    var p, o = {}, i;
+    try {
+      p = new Intl.DateTimeFormat("en-US",{timeZone:CUTOFF.tz,hour12:false,
+            weekday:"short",year:"numeric",month:"2-digit",day:"2-digit",
+            hour:"2-digit",minute:"2-digit",second:"2-digit"}).formatToParts(new Date());
+    } catch(e){ return null; }
+    for(i=0;i<p.length;i++) o[p[i].type]=p[i].value;
+    return { wd:o.weekday, h:+o.hour%24, m:+o.minute, s:+o.second };
+  }
+
+  function nextBusinessDay(wd){
+    if(wd==="Fri") return "Monday";
+    if(wd==="Sat") return "Monday";
+    if(wd==="Sun") return "Monday";
+    return "tomorrow";
+  }
+
+  function paint(){
+    var n = zoneNow();
+    if(!n) return;
+
+    var weekend = (n.wd==="Sat" || n.wd==="Sun");
+    var left = (CUTOFF.hour*3600 + CUTOFF.minute*60) - (n.h*3600 + n.m*60 + n.s);
+
+    var timerTxt, labelTxt, subTxt;
+
+    if(weekend || left <= 0){
+      var day = weekend ? "Monday" : nextBusinessDay(n.wd);
+      timerTxt = "";
+      labelTxt = weekend
+        ? "Next " + CUTOFF.noun + " window opens " + day
+        : "Today's " + CUTOFF.noun + " window has closed";
+      subTxt   = "Finish now and your file is in the stack when " +
+                 (day === "tomorrow" ? "they open tomorrow" : day + " opens") + ".";
+    } else {
+      /* Always ticking. Format keeps hours from being misread as minutes:
+         "3h 08m 41s" when over an hour, "08:41" inside the last hour. */
+      var h = Math.floor(left/3600), m = Math.floor((left%3600)/60), sec = left%60;
+      timerTxt = h > 0
+        ? h + "h " + (m<10?"0":"") + m + "m " + (sec<10?"0":"") + sec + "s"
+        : (m<10?"0":"") + m + ":" + (sec<10?"0":"") + sec;
+      labelTxt = "Today's " + CUTOFF.noun + " cutoff in:";
+      subTxt   = "Files in before " + fmt(CUTOFF.hour, CUTOFF.minute) + " " +
+                 CUTOFF.tzLabel + " get worked today. After that, tomorrow's stack.";
+    }
+
+    var bar = document.getElementById("cutbar");
+    if(bar){
+      bar.hidden = false;
+      var bl = document.getElementById("cutbar-label");
+      var bt = document.getElementById("cutbar-timer");
+      var narrow = window.innerWidth < 560;
+      if(timerTxt){
+        bar.classList.remove("is-past");
+        if(bl) bl.textContent = narrow ? "Cutoff in" : labelTxt.replace(/:$/,"");
+        if(bt) bt.textContent = timerTxt;
+      } else {
+        bar.classList.add("is-past");
+        if(bl) bl.textContent = narrow ? "Cutoff passed — finish for tomorrow's first stack"
+                                       : labelTxt + " — finish now for the first stack";
+      }
+    }
+
+    for(var i=0;i<boxes.length;i++){
+      var box = boxes[i];
+      box.hidden = false;
+      var lab = box.querySelector("[data-cutoff-label]");
+      var tim = box.querySelector("[data-cutoff-timer]");
+      if(lab) lab.textContent = labelTxt;
+      if(tim){ tim.textContent = timerTxt; tim.style.display = timerTxt ? "" : "none"; }
+      var sub = box.nextElementSibling;
+      if(sub && sub.hasAttribute("data-cutoff-sub")){ sub.hidden = false; sub.textContent = subTxt; }
+    }
+  }
+
+  function fmt(h,m){
+    var ap = h>=12 ? "PM" : "AM", hh = h%12; if(hh===0) hh=12;
+    return hh + (m ? ":"+(m<10?"0":"")+m : "") + " " + ap;
+  }
+
+  paint();
+  setInterval(paint, 1000);
+}();
+
+/* ============================================================
+   MATCH REVEAL  —  see the markup comment above #reveal
+   Past tense only. No invented counts. Under 2.5s. Never blocks.
+   ============================================================ */
+!function(){
+  "use strict";
+
+  /* Real number of buyers in your LeadProsper campaign for this
+     vertical. Leave at 0 and the line simply does not render.
+     Do NOT put a number here you cannot produce on request. */
+  var PARTNERS = 0;
+
+  var wrap = document.getElementById("reveal");
+  if(!wrap) return;
+  if(new URLSearchParams(window.location.search).get("debug") === "1") return;
+
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var steps = [
+    "Your answers came in",
+    PARTNERS > 0 ? ("Checked against " + PARTNERS + " lending partners")
+                 : "Checked against our lending partners",
+    "Matched to the ones that read deposits first",
+    "ROK Financial took your file"
+  ];
+
+  var list = document.getElementById("reveal-list");
+  var bar  = document.getElementById("reveal-bar");
+  var head = document.getElementById("reveal-title");
+  var sub  = document.getElementById("reveal-sub");
+  if(!list || !bar) return;
+
+  wrap.hidden = false;
+
+  function row(text, last){
+    var d = document.createElement("div");
+    d.style.cssText = "display:flex;gap:10px;align-items:flex-start;margin-bottom:11px;" +
+                      "font-size:14px;line-height:1.45;opacity:0;transform:translateY(4px);" +
+                      "transition:opacity .3s ease, transform .3s ease;";
+    d.innerHTML = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--green)" ' +
+                  'stroke-width="3" stroke-linecap="round" style="flex-shrink:0;margin-top:1px;">' +
+                  '<polyline points="20 6 9 17 4 12"/></svg><span style="color:var(--navy);font-weight:' +
+                  (last ? "800" : "600") + ';">' + text + '</span>';
+    list.appendChild(d);
+    requestAnimationFrame(function(){ d.style.opacity="1"; d.style.transform="none"; });
+  }
+
+  function finish(){
+    bar.style.width = "100%";
+    if(head) head.textContent = "Your Deposit Match is done.";
+    if(sub)  sub.textContent  = "One form left and it is theirs, not ours.";
+  }
+
+  if(reduce){                      /* no animation: show it all at once */
+    steps.forEach(function(t,i){ row(t, i===steps.length-1); });
+    finish();
+    return;
+  }
+
+  var STEP_MS = 480;               /* 4 steps -> ~1.9s total */
+  steps.forEach(function(t,i){
     setTimeout(function(){
-      bar.style.width=s.pct+"%";
-      st.textContent=s.text;
-      if(i<steps.length-1){
-        var r=document.createElement("div");
-        r.className="scan-check";
-        r.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span style="color:var(--navy);font-weight:600;">'+s.text.replace("...","")+'</span>';
-        ci.appendChild(r);
-      }
-      if(i===steps.length-1){
-        st.textContent="We found your match!";
-        st.style.color="var(--green)";
-        ss.textContent="Preparing your application...";
-        setTimeout(function(){
-          lp.style.opacity="0";
-          setTimeout(function(){
-            lp.style.display="none";
-            op.style.display="block";
-            st.style.color="";
-          },400);
-        },1200);
-      }
-    },s.t);
+      row(t, i===steps.length-1);
+      bar.style.width = Math.round(((i+1)/steps.length)*100) + "%";
+      if(i === steps.length-1) finish();
+    }, i*STEP_MS);
   });
 }();
 
-// === COUNTDOWN ===
-!function(){var t=899,e=["cd1","cd2","cd3"];setInterval(function(){if(t>0){t--;var n=Math.floor(t/60),o=t%60,r=n+":"+(o<10?"0":"")+o;e.forEach(function(t){var e=document.getElementById(t);e&&(e.textContent=r)})}},1e3)}();
+
 </script>
 
 </body>

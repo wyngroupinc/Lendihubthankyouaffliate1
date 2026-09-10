@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <meta name="description" content="A few quick questions about your business deposits. No credit pull, nothing to upload.">
-  <title>Lendi Hub — Check What Your Deposits Qualify For</title>
+  <meta name="description" content="Answer a few questions about your monthly deposits and see which lenders read that number first. No credit pull, no cost, about 60 seconds.">
+  <title>Lendi Hub — Start Your Deposit Match</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20width%3D%2264%22%20height%3D%2264%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22gF%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%232D8C6E%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2334C094%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20x%3D%220%22%20y%3D%220%22%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2216%22%20fill%3D%22%23FFFFFF%22%2F%3E%3Cpath%20d%3D%22M18%2012%20L18%2046%20L46%2046%22%20stroke%3D%22url%28%23gF%29%22%20stroke-width%3D%2210%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Ccircle%20cx%3D%2246%22%20cy%3D%2222%22%20r%3D%227%22%20fill%3D%22%2334C094%22%2F%3E%3C%2Fsvg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,6 +30,11 @@ fbq('trackCustom', 'ViewForm');
 src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
+<style>
+  /* red reads as an error state on a page whose whole job is trust */
+  .progress__step--active{background:var(--navy) !important;}
+  .sticky-bar__btn{background:var(--green) !important;}
+</style>
 </head>
 <body>
 
@@ -43,9 +48,16 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
   to you. Education goes below the form or gets cut.
 
   Offer stack (all true, all checkable):
-    about 60 seconds  -  no credit pull  -  no documents
-    no cost  -  no obligation  -  nothing locked in until you
-    sign with a lender yourself
+    about 60 seconds  -  no credit pull  -  no cost
+    no obligation  -  nothing locked in until you sign with a
+    lender yourself
+
+  "No documents" was REMOVED (Sept 2026). It was true of THIS
+  step and false of the next one: the lender asks for bank
+  statements before it funds. Promising no documents here sets
+  up the drop-off on the thank-you page and lands on the buyer's
+  close rate. Scope every friction claim to the step it applies
+  to, never to the whole process.
 
   NO fabricated urgency. There is no real deadline on this page,
   so there is no countdown on it either.
@@ -72,9 +84,9 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
       <div class="progress__step progress__step--pending"></div>
     </div>
     <div class="progress__labels">
-      <span style="color:var(--green);">✓ How it works</span>
-      <span style="color:var(--navy);font-weight:800;">Your numbers</span>
-      <span style="color:var(--text-light);">Your options</span>
+      <span style="color:var(--green);">✓ The gap</span>
+      <span style="color:var(--navy);font-weight:800;">Your deposits</span>
+      <span style="color:var(--text-light);">Your match</span>
     </div>
   </div>
 </section>
@@ -82,8 +94,8 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
 <!-- HEADLINE (message match to page 1: deposits decide this) -->
 <section class="section--sm" style="padding-top:22px;padding-bottom:10px;">
   <div class="container--narrow text-center">
-    <h1 class="heading heading--lg mb-12">The second way, in about 60 seconds.</h1>
-    <p class="subhead" style="max-width:540px;margin:0 auto;">No credit pull. No documents. No cost. Answer a few questions about your deposits and see what you qualify for.</p>
+    <h1 class="heading heading--lg mb-12">Fix the timing in about 60 seconds.</h1>
+    <p class="subhead" style="max-width:540px;margin:0 auto;">Tell us what lands in your account each month. We will show you which lenders read that number first. No credit pull. No cost. Nothing to upload at this step.</p>
   </div>
 </section>
 
@@ -107,7 +119,8 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
 <!-- RISK REVERSAL -->
 <section style="padding:0 24px 10px;">
   <div class="container--form text-center">
-    <p class="body-text"><strong class="bold">Nothing is locked in.</strong> You can stop at any point, and nothing is binding until you sign with a lender yourself.</p>
+    <p class="body-text mb-14"><strong class="bold">The No-Surprise Guarantee holds here too.</strong> Looking costs you nothing and no points. You never pay us. Every lender you meet through us puts the payment, how often it comes out, and the total payback in writing before you sign.</p>
+    <p class="body-text">You can stop at any point. Nothing is binding until you sign with a lender yourself.</p>
   </div>
 </section>
 
@@ -164,7 +177,7 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
 -->
 <section class="section--sm" style="padding-top:18px;padding-bottom:8px;">
   <div class="container--mid">
-    <p class="label text-center mb-20">Owners who already did this</p>
+    <p class="label text-center mb-20">Owners with the same gap</p>
     <div class="grid-2" style="gap:14px;">
 
       <div class="review-card">
@@ -199,22 +212,23 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
 <!-- WHAT HAPPENS NEXT -->
 <section class="section--sm">
   <div class="container--mid">
-    <p class="label text-center mb-20">After you finish</p>
+    <p class="label text-center mb-20">What happens after you finish</p>
     <div class="grid-3">
       <div class="text-center">
         <div class="step-chip">1</div>
-        <div class="heading--xs mb-8" style="font-family:'Fraunces',serif;font-weight:700;">We read your answers</div>
-        <p class="body-text">Deposits first, then time in business and what you already owe.</p>
+        <div class="heading--xs mb-8" style="font-family:'Fraunces',serif;font-weight:700;">We read the gap, not the score</div>
+        <p class="body-text">Deposits first. Then time in business, then what you already owe.</p>
       </div>
       <div class="text-center">
         <div class="step-chip">2</div>
-        <div class="heading--xs mb-8" style="font-family:'Fraunces',serif;font-weight:700;">Partners who fund your kind of business see it</div>
-        <p class="body-text">Only lending partners who work with businesses like yours. Not a call list.</p>
+        <div class="heading--xs mb-8" style="font-family:'Fraunces',serif;font-weight:700;">We match you to the deposit lenders</div>
+        <p class="body-text">Only lenders who read deposits first see your file. Not a call list.</p>
       </div>
       <div class="text-center">
         <div class="step-chip">3</div>
         <div class="heading--xs mb-8" style="font-family:'Fraunces',serif;font-weight:700;">You look at what comes back</div>
-        <p class="body-text">Take the one that works, or take none of them. Nothing is locked in until you sign with a lender.</p>
+        <p class="body-text">Take the one that works. Or take none of them. Nothing is locked in until you sign.</p>
+        <p class="small-text mt-16">A lender will ask for your last few months of bank statements before it funds. That comes after you see numbers, not before.</p>
       </div>
     </div>
     <p class="small-text text-center mt-24">Being matched is not an approval. Each lender reviews your file and makes its own decision.</p>
@@ -224,7 +238,7 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
 <!-- BACK LINK -->
 <section style="padding:0 24px 40px;">
   <div class="container--narrow text-center">
-    <p class="small-text"><a href="business.html" style="color:var(--text-light);">Read how deposit-based funding works first</a></p>
+    <p class="small-text"><a href="business.html" style="color:var(--text-light);">Read how the Deposit Match works first</a></p>
   </div>
 </section>
 
