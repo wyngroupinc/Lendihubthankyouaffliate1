@@ -35,6 +35,35 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
   .progress__step--active{background:var(--navy) !important;}
   .sticky-bar__btn{background:var(--green) !important;}
 </style>
+<style>
+  /* --- FORM SHELL ---------------------------------------------------
+     The LeadCapture embed draws its OWN card (border, shadow, padding).
+     Wrapping it in a second card meant the buttons sat inside
+     card-inside-card and lost ~48px per side on a phone.
+
+     Desktop keeps the outer card - there is width to spare and it
+     frames the form nicely.
+     Mobile drops it entirely, so LeadCapture's card is the only
+     chrome and the buttons get the full screen width.
+     ------------------------------------------------------------------ */
+  #form-shell{
+    background:var(--white);
+    border:1px solid var(--green-accent);
+    border-radius:var(--radius-lg);
+    padding:32px;
+    box-shadow:var(--shadow-lg);
+  }
+  @media (max-width:768px){
+    /* outer card off - no background, no border, no padding */
+    #form-shell{background:none;border:0;padding:0;box-shadow:none;border-radius:0;}
+    /* and give the section back its side gutter instead */
+    .container--form{padding:0 10px !important;}
+    #form-wrap{padding-left:0 !important;padding-right:0 !important;}
+  }
+  @media (max-width:400px){
+    .container--form{padding:0 6px !important;}
+  }
+</style>
 </head>
 <body>
 
@@ -100,9 +129,9 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
 </section>
 
 <!-- FORM -->
-<section style="padding:0 24px 20px;">
+<section id="form-wrap" style="padding:0 24px 20px;">
   <div class="container--form">
-    <div style="background:var(--white);border:1px solid var(--green-accent);border-radius:var(--radius-lg);padding:32px 32px;box-shadow:var(--shadow-lg);">
+    <div id="form-shell">
       <div id="leadcapture-form">
         <div id="form-loader" style="text-align:center;padding:48px 20px;">
           <div style="width:48px;height:48px;border:4px solid var(--border);border-top-color:var(--green);border-radius:50%;margin:0 auto 16px;animation:spin .8s linear infinite;"></div>
