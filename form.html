@@ -286,24 +286,129 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
 </footer>
 
 <script>
+/* ============================================================
+   KEEP THE FORM CENTERED WHILE THEY ANSWER
+   ============================================================
+   Every time the embed swaps a step, re-centre it in the
+   viewport so the visitor never has to hunt for the next
+   question or scroll to reach Continue.
+
+   WHY IT LISTENS FOUR WAYS
+   The LeadCapture embed may render inline into this page OR as
+   a cross-origin iframe, and the two emit completely different
+   signals. Rather than guess, this listens for all of them and
+   debounces down to one scroll:
+     1. MutationObserver  - fires if the embed renders inline
+     2. ResizeObserver    - fires when the container/iframe height
+                            changes, which a step change always does
+     3. postMessage       - many embeds post a height or step event
+     4. Height poll       - 400ms safety net that catches whatever
+                            the other three miss
+
+   RULES IT FOLLOWS
+   - Never scrolls on first paint. The visitor should land on the
+     headline, not be yanked past it.
+   - A form TALLER than the viewport aligns near the top instead
+     of centring, because centring a tall form hides its question.
+   - Offsets by the sticky nav so the headline never sits under it.
+   - Backs off for 1s after a manual scroll, so it never fights
+     someone reading.
+   - Honours prefers-reduced-motion (jumps instead of animating).
+   ============================================================ */
 !function(){
-  var f=document.getElementById("leadcapture-form");
-  var loader=document.getElementById("form-loader");
-  if(!f)return;
-  var first=true;
-  new MutationObserver(function(){
-    if(loader&&f.querySelector("iframe,form,input,button,[class]")){
-      loader.style.display="none";
-      loader=null;
+  "use strict";
+
+  var f = document.getElementById("leadcapture-form");
+  var loader = document.getElementById("form-loader");
+  if(!f) return;
+
+  var first = true, lastH = 0, timer = null, userScrolledAt = 0, selfScrollUntil = 0;
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* Measure whatever is ACTUALLY pinned to the top of this page.
+     Do not assume it is .nav - on these pages .nav-wrap is the sticky
+     element and .nav inside it is explicitly position:static, so
+     measuring .nav returns 0 and every scroll lands one nav too far. */
+  function navHeight(){
+    var best = 0;
+    var candidates = document.querySelectorAll(".nav-wrap, .nav, header, #cutbar, [data-sticky-top]");
+    for(var i = 0; i < candidates.length; i++){
+      var el = candidates[i], cs = getComputedStyle(el);
+      if(cs.position !== "sticky" && cs.position !== "fixed") continue;
+      var r = el.getBoundingClientRect();
+      if(r.top > 4) continue;              // pinned at the top, not floating mid-page
+      if(r.bottom > best) best = r.bottom; // bottom edge = how much it covers
     }
-    if(first){first=false;return;}
-    setTimeout(function(){
-      var r=f.getBoundingClientRect();
-      if(r.top<0||r.bottom>window.innerHeight){
-        window.scrollTo({top:window.scrollY+r.top-Math.max(0,(window.innerHeight-r.height)/2),behavior:"smooth"});
-      }
-    },60);
-  }).observe(f,{childList:true,subtree:true});
+    return Math.round(best);
+  }
+
+  function centre(){
+    var r = f.getBoundingClientRect();
+    if(!r.height) return;
+
+    var nav  = navHeight();
+    var free = window.innerHeight - nav;      // usable viewport below the nav
+    var top;
+
+    if(r.height >= free - 24){
+      top = window.scrollY + r.top - nav - 12;          // taller than the screen: pin near the top
+    } else {
+      top = window.scrollY + r.top - nav - (free - r.height) / 2;   // otherwise centre it
+    }
+
+    top = Math.max(0, Math.round(top));
+    if(Math.abs(top - window.scrollY) < 8) return;       // already there
+
+    selfScrollUntil = Date.now() + 900;                  // ignore our own scroll events
+    try { window.scrollTo({ top: top, behavior: reduce ? "auto" : "smooth" }); }
+    catch(e){ window.scrollTo(0, top); }
+  }
+
+  function schedule(){
+    if(loader && f.querySelector("iframe,form,input,button,select,textarea")){
+      loader.style.display = "none";
+      loader = null;
+    }
+    if(first){ first = false; lastH = f.offsetHeight; return; }
+    if(Date.now() - userScrolledAt < 1000) return;       // they are reading - leave them alone
+    clearTimeout(timer);
+    timer = setTimeout(centre, 120);                     // debounce a burst of changes into one scroll
+  }
+
+  // 1. inline render
+  try {
+    new MutationObserver(schedule).observe(f, { childList:true, subtree:true });
+  } catch(e){}
+
+  // 2. height change (covers the iframe case)
+  try {
+    if(window.ResizeObserver){
+      var ro = new ResizeObserver(schedule);
+      ro.observe(f);
+      new MutationObserver(function(){
+        var fr = f.querySelector("iframe");
+        if(fr && !fr.__lhWatched){ fr.__lhWatched = 1; try { ro.observe(fr); } catch(e){} }
+      }).observe(f, { childList:true, subtree:true });
+    }
+  } catch(e){}
+
+  // 3. the embed telling us itself
+  window.addEventListener("message", function(ev){
+    if(!ev || !ev.data) return;
+    var d = ev.data, s = typeof d === "string" ? d : (d.type || d.event || "");
+    if(/height|resize|step|page|scroll/i.test(String(s))) schedule();
+  }, false);
+
+  // 4. safety net
+  setInterval(function(){
+    var h = f.offsetHeight;
+    if(h && Math.abs(h - lastH) > 12){ lastH = h; schedule(); }
+  }, 400);
+
+  // do not fight a human
+  window.addEventListener("scroll", function(){
+    if(Date.now() > selfScrollUntil) userScrolledAt = Date.now();
+  }, { passive:true });
 }();
 </script>
 <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
