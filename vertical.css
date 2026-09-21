@@ -4,10 +4,10 @@
    ============================================ */
 
 /* --- NAV WITH VERTICAL LINKS --- */
-.nav--split { justify-content: space-between; max-width: 1100px; margin: 0 auto; border-bottom: none; }
+.nav--split { justify-content: space-between; flex-wrap: nowrap; gap: 12px; max-width: 1100px; margin: 0 auto; border-bottom: none; }
 .nav-wrap { background: var(--white); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
 .nav-wrap .nav { position: static; border-bottom: none; }
-.nav__links { display: flex; gap: 22px; align-items: center; }
+.nav__links { display: flex; gap: 22px; align-items: center; flex-shrink: 0; white-space: nowrap; }
 .nav__links a { font-size: 14px; font-weight: 700; color: var(--text-mid); transition: color .15s; }
 .nav__links a:hover { color: var(--navy); }
 .nav__links a.active { color: var(--green); }
@@ -79,4 +79,26 @@
   .mini-offer__stat .val { font-size: 14px; }
   .mini-offer--tilt-l, .mini-offer--tilt-r { transform: none; }
   .review-card { padding: 20px; }
+}
+
+
+/* --- LOGO RESPONSIVE GUARD (brand v7) --- */
+.nav__logo, .footer__logo { width: auto; }
+.nav--split { flex-wrap: nowrap; min-width: 0; }
+.nav__links { flex-shrink: 0; }
+.nav__links a { white-space: nowrap; }
+/* last resort: scale the mark down rather than clip the links */
+.nav__logo { flex-shrink: 1; min-width: 0; object-fit: contain; object-position: left center; }
+
+@media (max-width: 430px) {
+  .nav { padding: 10px 12px; gap: 8px; }
+  .nav__logo { height: 26px; }
+  .nav__links { gap: 8px; }
+  .nav__links a { font-size: 10.5px; }
+  .footer__logo { height: 32px; }
+}
+@media (max-width: 360px) {
+  .nav__logo { height: 24px; }
+  .nav__links { gap: 6px; }
+  .nav__links a { font-size: 10px; }
 }
