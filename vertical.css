@@ -36,7 +36,7 @@
 /* --- HERO DECOR (soft background glow) --- */
 .hero-decor { position: relative; overflow: hidden; }
 .hero-decor::before { content: ""; position: absolute; top: -120px; left: 50%; transform: translateX(-70%); width: 560px; height: 560px; background: radial-gradient(circle, rgba(52,192,148,.12), transparent 65%); pointer-events: none; }
-.hero-decor::after { content: ""; position: absolute; bottom: -160px; right: -80px; width: 480px; height: 480px; background: radial-gradient(circle, rgba(27,42,74,.07), transparent 65%); pointer-events: none; }
+.hero-decor::after { content: ""; position: absolute; bottom: -160px; right: -80px; width: 480px; height: 480px; background: radial-gradient(circle, rgba(11,35,67,.07), transparent 65%); pointer-events: none; }
 .hero-decor > * { position: relative; z-index: 1; }
 
 /* --- MINI OFFER PREVIEW (hero teaser cards) --- */
