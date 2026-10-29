@@ -1,0 +1,59 @@
+LENDIHUB — PERSONAL LOANS REMOVED, BUSINESS FUNDING ONLY
+29 Oct 2026
+
+Drop these 9 .html files into the repo root, replacing what is there,
+and DELETE the three files listed under REMOVE.
+No CSS change. styles.css and vertical.css are untouched.
+
+REMOVE FROM THE SERVER
+  personal.html
+  personal-form.html
+  personal-thankyou.html
+
+HOMEPAGE
+  index.html is now the business funding page. Same content as
+  business.html, its own <title>, and a canonical tag pointing at
+  https://lendihub.com/ . business.html stays live with the same
+  canonical, so the two do not compete in search and no existing
+  link or ad breaks.
+
+NAVIGATION
+  The Personal Loans / Business Loans chooser is gone. Nav is now
+  the logo plus one "Get Funded" link to form.html. With one product
+  a choice step is pure friction.
+
+FOOTER (all 9 pages)
+  Business Funding | Funding Partners | Privacy Policy | Terms of Use |
+  Do Not Sell or Share My Personal Information | Contact
+
+PARTNERS PAGE
+  QuinStreet, Inc. removed - they were the personal loan partner and
+  no longer receive data. The "personal loan requests may go to more
+  than one partner" line removed. Remaining: Rok Financial, Big Think
+  Capital. Last updated bumped to 29 Oct 2026.
+
+PRIVACY POLICY
+  Scope sentence no longer claims to cover "our personal loan pages".
+  Last updated bumped to 29 Oct 2026.
+
+DISCLOSURES (decline, form, thankyou, thankyou-buyer, partners)
+  "connects consumers with lending partners"
+      -> "connects business owners with funding partners"
+  "Not all consumers will qualify for a loan or the lowest
+   advertised rate."
+      -> "Not all businesses will qualify for funding, or for the
+          amounts or terms shown."
+  "when a consumer is matched" -> "when a business is matched"
+  The $25,000 personal loan APR representative example is gone. It
+  only lived on the old homepage and had no place on a business site.
+
+VERIFIED
+  Every internal link resolves. Tag balance checked on all 9 pages
+  (div and section open/close match). Rendered at 390px and 1280px:
+  no horizontal scroll, no JS errors. No remaining reference to
+  personal loans or QuinStreet anywhere in the site.
+
+STILL OPEN
+  The Personal Loans / Debt Relief funnel in LeadCapture is still
+  there in draft (3 leads, TrustedForm off, OTP off, pixel off).
+  Archive it if you are done with that vertical.
