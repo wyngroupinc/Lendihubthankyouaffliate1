@@ -1,59 +1,73 @@
-LENDIHUB — PERSONAL LOANS REMOVED, BUSINESS FUNDING ONLY
+LENDIHUB — PRODUCT PAGES ADDED
 29 Oct 2026
 
-Drop these 9 .html files into the repo root, replacing what is there,
-and DELETE the three files listed under REMOVE.
-No CSS change. styles.css and vertical.css are untouched.
+Drop all files into the repo root, replacing what is there.
+This release DOES include styles.css and vertical.css — they have
+new rules at the bottom and the product pages need them.
 
-REMOVE FROM THE SERVER
-  personal.html
-  personal-form.html
-  personal-thankyou.html
+NEW PAGES
+  working-capital.html   ~1,000 words
+  term-loans.html        ~900 words
+  line-of-credit.html    ~870 words
 
-HOMEPAGE
-  index.html is now the business funding page. Same content as
-  business.html, its own <title>, and a canonical tag pointing at
-  https://lendihub.com/ . business.html stays live with the same
-  canonical, so the two do not compete in search and no existing
-  link or ad breaks.
+  Each one: hero + CTA, what it is, how repayment works, who it fits
+  and who it does not (honest both ways), the cost framing owners get
+  wrong, a three-way comparison block with the current page marked,
+  six FAQs, final CTA. All CTAs go to form.html — one funnel, as before.
+
+  Canonical tags set. robots index,follow. Reading level 4.0–4.4,
+  inside your 5th-grade rule.
+
+  NO amounts, rates, factor rates, approval times or term lengths
+  anywhere. Nothing to defend later, nothing to update when the
+  funder panel changes.
+
+WORKING CAPITAL covers merchant cash advance / revenue-based funding
+  honestly, including how daily and weekly remittance actually works
+  and when it goes badly. "Ask this before you sign" box included.
+
+TERM LOANS carries the credit-qualifier positioning: a plain
+  "what helps you / what gets in the way" list naming credit, time
+  in business, deposit stability and existing advances. Someone who
+  does not fit learns it in a minute instead of three weeks.
 
 NAVIGATION
-  The Personal Loans / Business Loans chooser is gone. Nav is now
-  the logo plus one "Get Funded" link to form.html. With one product
-  a choice step is pure friction.
+  Desktop: logo | Working Capital · Term Loans · Line of Credit | Get Funded
+  Mobile:  logo | Get Funded
+  The product links are hidden below 900px on purpose. Four links plus
+  the logo crushes the mark at 390px — that is the bug we hit in
+  September. On mobile the products are reachable from the homepage
+  cards instead, which converts better than a cramped nav anyway.
 
-FOOTER (all 9 pages)
-  Business Funding | Funding Partners | Privacy Policy | Terms of Use |
-  Do Not Sell or Share My Personal Information | Contact
+HOMEPAGE
+  New "Funding options" card section sits between the hero and the
+  gap section, on index.html and business.html. Three cards, one per
+  product. Stacks to one column below 760px.
 
-PARTNERS PAGE
-  QuinStreet, Inc. removed - they were the personal loan partner and
-  no longer receive data. The "personal loan requests may go to more
-  than one partner" line removed. Remaining: Rok Financial, Big Think
-  Capital. Last updated bumped to 29 Oct 2026.
-
-PRIVACY POLICY
-  Scope sentence no longer claims to cover "our personal loan pages".
-  Last updated bumped to 29 Oct 2026.
-
-DISCLOSURES (decline, form, thankyou, thankyou-buyer, partners)
-  "connects consumers with lending partners"
-      -> "connects business owners with funding partners"
-  "Not all consumers will qualify for a loan or the lowest
-   advertised rate."
-      -> "Not all businesses will qualify for funding, or for the
-          amounts or terms shown."
-  "when a consumer is matched" -> "when a business is matched"
-  The $25,000 personal loan APR representative example is gone. It
-  only lived on the old homepage and had no place on a business site.
+CSS
+  New block at the end of BOTH styles.css and vertical.css:
+  .nav__product, .product-grid, .product-card and friends.
+  It is in both files on purpose — vertical.css loads after styles.css
+  at equal specificity, so a rule in only one of them gets silently
+  overridden. That caught us once already.
 
 VERIFIED
-  Every internal link resolves. Tag balance checked on all 9 pages
-  (div and section open/close match). Rendered at 390px and 1280px:
-  no horizontal scroll, no JS errors. No remaining reference to
-  personal loans or QuinStreet anywhere in the site.
+  All 12 pages: div / section / footer / nav tags balanced, every
+  internal link resolves. Rendered at 390px and 1280px — no horizontal
+  scroll, no JS errors, one footer per page. Nav confirmed to show
+  four links at 1280 and one at 390.
 
-STILL OPEN
-  The Personal Loans / Debt Relief funnel in LeadCapture is still
-  there in draft (3 leads, TrustedForm off, OTP off, pixel off).
-  Archive it if you are done with that vertical.
+NOTE ON TWO BUGS I CAUGHT
+  Building this, a regex for lifting the nav block out of the template
+  over-matched and embedded the entire partners page inside each
+  product page. Tag-balance checks passed, because the duplicated
+  content was internally balanced. Only the rendered screenshot showed
+  it. Same thing happened earlier with the partners page edit. If you
+  ever have another agent touch these files, make it render and look,
+  not just diff.
+
+NEXT, IF YOU WANT IT
+  The form does not yet know which product someone came from. Adding
+  a URL parameter so working-capital.html?reason=Working+Capital
+  pre-selects the funding reason is a LeadCapture funnel change, and
+  it would let you see which product page actually drives funded deals.

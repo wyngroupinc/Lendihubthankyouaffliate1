@@ -102,3 +102,16 @@
   .nav__links { gap: 6px; }
   .nav__links a { font-size: 10px; }
 }
+
+
+/* --- PRODUCT MENU + PRODUCT CARDS (Oct 2026) --- */
+.nav__links a.nav__product { display: none; }
+@media (min-width: 900px) { .nav__links a.nav__product { display: inline; } }
+
+.product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: stretch; }
+@media (max-width: 760px) { .product-grid { grid-template-columns: 1fr; } }
+.product-card { display: block; background: var(--white); border: 2px solid var(--border); border-radius: var(--radius-lg); padding: 26px 24px; transition: transform .2s, border-color .2s, box-shadow .2s; }
+a.product-card:hover { transform: translateY(-4px); border-color: var(--green-accent); box-shadow: var(--shadow-lg); }
+.product-card--active { border-color: var(--green); background: var(--green-pale); }
+.product-card__title { font-family: 'Fraunces', serif; font-weight: 800; font-size: 21px; color: var(--text); line-height: 1.15; margin-bottom: 12px; }
+.product-card__tag { display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--green); background: var(--white); border: 1px solid var(--green); border-radius: var(--radius-full); padding: 3px 10px; margin: 0 0 12px; }
