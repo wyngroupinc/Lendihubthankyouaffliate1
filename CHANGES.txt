@@ -1,73 +1,65 @@
-LENDIHUB — PRODUCT PAGES ADDED
+LENDIHUB — PRODUCT PAGE REDESIGN + ICONS
 29 Oct 2026
 
-Drop all files into the repo root, replacing what is there.
-This release DOES include styles.css and vertical.css — they have
-new rules at the bottom and the product pages need them.
+READ THIS FIRST
+  Last time you uploaded the HTML but not the stylesheets. That is why
+  the comparison block rendered as plain stacked text — .product-grid
+  and .product-card had no rules on the server.
 
-NEW PAGES
-  working-capital.html   ~1,000 words
-  term-loans.html        ~900 words
-  line-of-credit.html    ~870 words
+  This release will look wrong in exactly the same way unless you
+  upload styles.css AND vertical.css along with the HTML.
 
-  Each one: hero + CTA, what it is, how repayment works, who it fits
-  and who it does not (honest both ways), the cost framing owners get
-  wrong, a three-way comparison block with the current page marked,
-  six FAQs, final CTA. All CTAs go to form.html — one funnel, as before.
+  Every page now asks for styles.css?v=3 and vertical.css?v=3, so
+  browsers that cached the old files will pull fresh ones. Keep the
+  ?v=3 on the links.
 
-  Canonical tags set. robots index,follow. Reading level 4.0–4.4,
-  inside your 5th-grade rule.
+WHAT CHANGED VISUALLY
 
-  NO amounts, rates, factor rates, approval times or term lengths
-  anywhere. Nothing to defend later, nothing to update when the
-  funder panel changes.
+  Comparison block ("Three ways to do it")
+    Was: three bare text blocks with no styling at all.
+    Now: three cards, each with its own icon, a divided row for
+    "Best when / You pay it back / It ends", a "Read more" link on
+    the two you are not on, and the current product marked with a
+    green border, mint background and a "You are here" pill.
+    Stacks to one column below 860px.
 
-WORKING CAPITAL covers merchant cash advance / revenue-based funding
-  honestly, including how daily and weekly remittance actually works
-  and when it goes badly. "Ask this before you sign" box included.
+  Icons (inline SVG, no image files, no external requests)
+    Working Capital  banknote
+    Term Loan        calendar with a check
+    Line of Credit   cycle arrow around a dollar
+    Plus a tick and a cross on the fit / not-fit cards, and a
+    question mark on "Ask this before you sign".
+    They inherit colour from CSS, so they stay on-brand if you
+    change the palette later.
 
-TERM LOANS carries the credit-qualifier positioning: a plain
-  "what helps you / what gets in the way" list naming credit, time
-  in business, deposit stability and existing advances. Someone who
-  does not fit learns it in a minute instead of three weeks.
+  Fit / not-fit cards
+    Coloured left edge (green / amber), icon in a tinted square,
+    uppercase heading. The two columns now read as opposites at a
+    glance instead of two identical cream boxes.
 
-NAVIGATION
-  Desktop: logo | Working Capital · Term Loans · Line of Credit | Get Funded
-  Mobile:  logo | Get Funded
-  The product links are hidden below 900px on purpose. Four links plus
-  the logo crushes the mark at 390px — that is the bug we hit in
-  September. On mobile the products are reachable from the homepage
-  cards instead, which converts better than a cramped nav anyway.
+  Line of Credit steps
+    "One / Two / Three" labels are now navy numbered circles.
 
-HOMEPAGE
-  New "Funding options" card section sits between the hero and the
-  gap section, on index.html and business.html. Three cards, one per
-  product. Stacks to one column below 760px.
+  Term Loans "what a lender looks at"
+    Converted to the same fit / not-fit treatment, so the credit
+    qualifier reads as a real gate rather than a list.
 
-CSS
-  New block at the end of BOTH styles.css and vertical.css:
-  .nav__product, .product-grid, .product-card and friends.
-  It is in both files on purpose — vertical.css loads after styles.css
-  at equal specificity, so a rule in only one of them gets silently
-  overridden. That caught us once already.
+  Section labels
+    Short green rule under each one. Small thing, but it gives every
+    section a visible start.
+
+  Comparison section now sits on white so it separates from the
+  cream page background.
+
+  Also fixed: the first H2 on each product page was repeating the H1
+  almost word for word. Now distinct, and baked into the generator so
+  it does not come back.
+
+UNCHANGED
+  All copy, all CTAs to form.html, no amounts or rates anywhere,
+  reading level 4.0-4.4.
 
 VERIFIED
-  All 12 pages: div / section / footer / nav tags balanced, every
-  internal link resolves. Rendered at 390px and 1280px — no horizontal
-  scroll, no JS errors, one footer per page. Nav confirmed to show
-  four links at 1280 and one at 390.
-
-NOTE ON TWO BUGS I CAUGHT
-  Building this, a regex for lifting the nav block out of the template
-  over-matched and embedded the entire partners page inside each
-  product page. Tag-balance checks passed, because the duplicated
-  content was internally balanced. Only the rendered screenshot showed
-  it. Same thing happened earlier with the partners page edit. If you
-  ever have another agent touch these files, make it render and look,
-  not just diff.
-
-NEXT, IF YOU WANT IT
-  The form does not yet know which product someone came from. Adding
-  a URL parameter so working-capital.html?reason=Working+Capital
-  pre-selects the funding reason is a LeadCapture funnel change, and
-  it would let you see which product page actually drives funded deals.
+  All 12 pages: div / section / footer / nav / svg / ul / a tags
+  balanced, every internal link resolves, cache keys bumped.
+  Rendered at 390px and 1280px, no horizontal scroll, no JS errors.
