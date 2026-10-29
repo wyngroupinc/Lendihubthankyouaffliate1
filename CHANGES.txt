@@ -1,65 +1,58 @@
-LENDIHUB — PRODUCT PAGE REDESIGN + ICONS
+LENDIHUB — NEW THANK-YOU PAGE
 29 Oct 2026
 
-READ THIS FIRST
-  Last time you uploaded the HTML but not the stylesheets. That is why
-  the comparison block rendered as plain stacked text — .product-grid
-  and .product-card had no rules on the server.
+FILES
+  thankyou.html         the new page
+  thankyou-buyer.html   identical copy, so the old URL keeps working
 
-  This release will look wrong in exactly the same way unless you
-  upload styles.css AND vertical.css along with the HTML.
+WHAT IT SAYS
+  "Your application is in."
+  Call today if submitted before 5pm ET, otherwise next business day.
+  The number it comes from (855-781-9800) with a line telling them to
+  save it, so they pick up instead of screening it.
+  A note that a text may follow and STOP works - consistent with the
+  consent they just agreed to.
+  Three steps: we read your file / a specialist calls / you get it in
+  writing, and nothing is agreed until they see the cost.
+  A "have this ready" list: three months of bank statements, legal
+  name and EIN, the amount and what it is for, and any advances they
+  are already paying.
 
-  Every page now asks for styles.css?v=3 and vertical.css?v=3, so
-  browsers that cached the old files will pull fresh ones. Keep the
-  ?v=3 on the links.
+WHAT I TOOK OUT
+  No Big Think. No ROK. No "finish your application here" second form.
+  No "While You Wait" offer links. You are working these yourself now,
+  so a handoff on the thank-you page competes with your own closer.
 
-WHAT CHANGED VISUALLY
+  The old /thankyou was not a confirmation at all - it was a second
+  pitch that sent people to a ROK form in a new tab. That is why it
+  felt like the lead vanished.
 
-  Comparison block ("Three ways to do it")
-    Was: three bare text blocks with no styling at all.
-    Now: three cards, each with its own icon, a divided row for
-    "Best when / You pay it back / It ends", a "Read more" link on
-    the two you are not on, and the current product marked with a
-    green border, mint background and a "You are here" pill.
-    Stacks to one column below 860px.
+THREE THINGS YOU HAVE TO DO, OR THIS DOES NOT TAKE EFFECT
 
-  Icons (inline SVG, no image files, no external requests)
-    Working Capital  banknote
-    Term Loan        calendar with a check
-    Line of Credit   cycle arrow around a dollar
-    Plus a tick and a cross on the fit / not-fit cards, and a
-    question mark on "Ask this before you sign".
-    They inherit colour from CSS, so they stay on-brand if you
-    change the palette later.
+  1. REPOINT LEADPROSPER
+     Your Big Think campaign returns a dynamic redirect to
+     https://lendihub.com/thinkbig-thankyou . While that is set, the
+     redirect wins and nobody sees this page. Change it to
+     https://lendihub.com/thankyou in the LeadProsper campaign, or
+     turn the redirect off and let LeadCapture show its own step.
 
-  Fit / not-fit cards
-    Coloured left edge (green / amber), icon in a tinted square,
-    uppercase heading. The two columns now read as opposites at a
-    glance instead of two identical cream boxes.
+  2. RETIRE /thinkbig-thankyou
+     Either delete it, or upload thankyou.html over it so any link
+     already in the wild lands somewhere correct.
 
-  Line of Credit steps
-    "One / Two / Three" labels are now navy numbered circles.
+  3. UPLOAD BOTH FILES
+     thankyou.html and thankyou-buyer.html. No CSS change this time -
+     the styles it uses are already in the v3 stylesheets you
+     uploaded with the product pages. If the three numbered circles
+     render as plain text, the stylesheets did not go up.
 
-  Term Loans "what a lender looks at"
-    Converted to the same fit / not-fit treatment, so the credit
-    qualifier reads as a real gate rather than a list.
+ALSO WORTH FIXING
+  The in-funnel thank-you step still reads "Congratulations! We
+  received your application. A funding specialist will reach out
+  shortly with your options." It only shows when LeadProsper does not
+  return a redirect, but it promises something vaguer than this page.
+  Say the word and I will align it.
 
-  Section labels
-    Short green rule under each one. Small thing, but it gives every
-    section a visible start.
-
-  Comparison section now sits on white so it separates from the
-  cream page background.
-
-  Also fixed: the first H2 on each product page was repeating the H1
-  almost word for word. Now distinct, and baked into the generator so
-  it does not come back.
-
-UNCHANGED
-  All copy, all CTAs to form.html, no amounts or rates anywhere,
-  reading level 4.0-4.4.
-
-VERIFIED
-  All 12 pages: div / section / footer / nav / svg / ul / a tags
-  balanced, every internal link resolves, cache keys bumped.
-  Rendered at 390px and 1280px, no horizontal scroll, no JS errors.
+  /thankyou-buyer had a live typo: "You're all set.A funding
+  specialist willbe in touch" - missing spaces. Gone now, since the
+  page is replaced.
