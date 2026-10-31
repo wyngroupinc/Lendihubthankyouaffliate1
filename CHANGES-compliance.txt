@@ -1,0 +1,114 @@
+LENDIHUB — A2P / SMS compliance fixes
+Built 31 Oct 2026
+
+################################################################
+#  READ THIS FIRST                                             #
+#                                                              #
+#  These 3 files are only TRUE after you change the consent    #
+#  text inside the LeadCapture funnel. Until then, the new     #
+#  "we do not share your SMS consent" statements contradict    #
+#  the consent your form actually shows. Deploy both together  #
+#  or neither.                                                 #
+################################################################
+
+THE DECISION THIS IS BUILT ON
+-----------------------------
+Text messages come from Lendihub only. Funding partners contact leads by
+PHONE and EMAIL, not SMS. That is what makes the carrier's required
+"no sharing" statement truthful without contradicting the fact that you
+sell leads, which your privacy policy correctly discloses in sections 5
+and 6.
+
+FILES CHANGED (3)
+-----------------
+privacy.html   +2,715   section 7 rewritten; short version updated; date
+terms.html     +2,031   section 7 rewritten; date 8 Oct -> 31 Oct
+form.html        +923   new crawlable SMS disclosure block under the form
+
+No other pages changed. NO CSS CHANGE — stylesheets are not in this zip.
+
+WHAT EACH FAILED CHECK NOW HAS
+------------------------------
+PRIVACY POLICY — "Clear 'No sharing' statement about SMS opt-ins"
+  Section 7 now states plainly that Lendihub does not sell, rent or
+  share SMS consent or mobile numbers for messaging with any third
+  party, and that no mobile information is shared with third parties or
+  affiliates for their own marketing. It then explains what IS shared
+  (the application, so a partner can call or email) so the statement
+  cannot be read as contradicting sections 5 and 6.
+
+TERMS OF SERVICE — "Description of SMS program and messaging use cases"
+  Section 7 now has an "Our SMS program" subsection naming the sender
+  and the four message types: verification passcode, application
+  received, specialist trying to reach you, follow-up on the request.
+
+TERMS OF SERVICE — "Carrier liability disclaimer"
+  Added: mobile carriers are not liable for delayed or undelivered
+  messages.
+
+OPT-IN FORM — all 8 checks
+  See the next section. Partly fixed, two cannot be fixed in HTML.
+
+WHY THE OPT-IN FORM SCORED 0/8
+------------------------------
+Nothing was wrong with your consent wording. The scanner could not SEE
+it. lendihub.com/form contains an embed that builds the funnel in
+JavaScript, so the HTML a crawler reads is "Loading your application...
+Please enable JavaScript to view the form." The hosted funnel URL
+(my.leadcapture.io/p/5wwxcpeq) is the same — 276 characters, no form,
+no consent text.
+
+The new block in form.html puts the disclosures in readable HTML, which
+should carry these six:
+  business name · message type · frequency · message & data rates ·
+  opt-out instructions · privacy policy & terms links
+
+THE TWO THAT HTML CANNOT FIX
+----------------------------
+  "Checkbox not pre-checked (explicit consent)"
+  "Checkbox is optional (not required)"
+
+Your funnel has NO consent checkbox. The consent block on the Email step
+is set to showCheckbox = false, so the wording sits above the button and
+clicking the button IS the consent. That is a valid TCPA pattern, but it
+means there is no box to inspect, and it also means SMS consent is not
+genuinely optional today — you cannot submit without it.
+
+To pass these two you would set, on the Email step consent block:
+  showCheckbox      = true
+  checkboxRequired  = false
+
+Understand the trade before you do it: leads who do not tick it arrive
+WITHOUT SMS consent, and you must not text those people. That is a real
+operational change, not a cosmetic one.
+
+I deliberately did NOT write "agreeing to texts is optional" into
+form.html, because today it is not.
+
+WHAT YOU MUST CHANGE IN LEADCAPTURE
+-----------------------------------
+Funnel: Lendihub Business Loans (GRPrs1N7cY)
+Step:   "Email" (order 14) — consent block 607aa6ec
+
+Replace the consent text with the version in CONSENT-REPLACEMENT.txt.
+The only substantive change: text messages are narrowed to Lendihub LLC
+alone, and an explicit no-sharing line is added. Calls and email are
+left exactly as they were, including Wyn Group Inc.
+
+STILL UNRESOLVED
+----------------
+Wyn Group Inc is still named in the consent text and in terms.html as a
+party that may CALL leads. You have said Lendihub LLC is its own entity.
+I have not removed it, because if Wyn Group does contact leads then
+removing it makes your consent under-inclusive, which is the dangerous
+direction. Answer yes or no and it gets swept everywhere in one pass.
+
+VERIFICATION DONE
+-----------------
+- privacy, terms and form rendered at 390px and 1280px: no JS errors,
+  no horizontal overflow, all new headings inheriting correct styles.
+- Swept all 12 pages for any surviving claim that a partner may text:
+  the only matches are the new sentences saying they may NOT.
+- Swept for stale "tick the consent box" wording: none left (both pages
+  previously described a checkbox that does not exist).
+- British spellings introduced in drafting were corrected to US.

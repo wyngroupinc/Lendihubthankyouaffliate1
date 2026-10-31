@@ -1,0 +1,17 @@
+REPLACEMENT CONSENT TEXT — LeadCapture, Lendihub Business Loans
+Step "Email" (order 14), consent block 607aa6ec-0d15-4e8c-8c78-f86e46c1ce30
+
+Do not install this without reading it. It is legal wording and it is
+your decision, not mine. Have counsel look at it if you have counsel.
+
+WHAT CHANGED vs what is live right now:
+  1. Text messages are narrowed to Lendihub LLC alone. Wyn Group Inc
+     and the funding partners are removed FROM THE TEXTING permission.
+  2. Calls remain exactly as they were: Lendihub, Wyn Group and the
+     partners may all call.
+  3. One new sentence stating SMS consent is not shared.
+Nothing else is altered.
+
+--- BEGIN REPLACEMENT TEXT ---
+By clicking See My Funding Options, I give my electronic signature and my express written consent to receive marketing calls from Lendihub LLC, its parent company Wyn Group Inc, and one or more of the funding partners listed at lendihub.com/partners, at the phone number I provided, and to receive text messages (SMS and MMS) about business funding from Lendihub LLC only. I understand these calls and texts may be made using an automatic telephone dialing system and may use an artificial, prerecorded, or AI-generated voice, and that I may be contacted even if my number is on a federal or state Do Not Call list. Lendihub does not sell or share my SMS consent, or my mobile number for text messaging, with any third party. Accepting this consent is not required to obtain any good or service. I may revoke it at any time by replying STOP to a text, telling the caller, or emailing info@lendihub.com. Message frequency varies. Message and data rates may apply. Reply HELP for help. I have read the Privacy Policy and Terms of Use.
+--- END REPLACEMENT TEXT ---
