@@ -1,0 +1,63 @@
+LENDIHUB — application framed as a dark panel
+Built 31 Oct 2026
+
+FILES (2): thankyou.html, thankyou-buyer.html  (identical mirrors)
+NO CSS CHANGE. All styling is inline on the new section.
+
+WHY
+---
+Ferrylend serves that form from their own domain. Cross-origin CSS
+cannot reach inside an iframe, so the form cannot be restyled from your
+page. I tested the one technique people claim works for this -- setting
+color-scheme:light on the iframe element -- in Chromium at both browser
+settings. It does nothing. The embedded page follows the viewer's own
+system preference regardless of what the parent asks for.
+
+So instead of a dark form sitting in a cream page looking broken, the
+section around it is now dark on purpose.
+
+WHAT CHANGED
+------------
+The application sits in a dark band (#0B1220) with:
+  - a green "SECURE APPLICATION" pill with a padlock
+  - a white serif heading, matching your Fraunces brand type
+  - muted blue-grey supporting copy
+  - the iframe in a rounded container with a hairline border and a drop
+    shadow, so it reads as a panel resting on the section rather than a
+    colour mismatch
+  - a small "Encrypted and sent straight to underwriting" line beneath
+
+The slight difference between the band and the form's own black is now
+doing work: it separates the panel from its background instead of
+looking like a seam.
+
+A DUPLICATION I CAUGHT
+----------------------
+The hero said "Finish your application below. It takes about five
+minutes" and the panel heading underneath said "Finish your
+application" with "About five minutes" in its subcopy. The same two
+sentences twice, about 200px apart.
+
+Fixed by splitting the jobs:
+  hero   -> reassurance. "A funding specialist already has your
+            details. The last step takes about five minutes."
+  panel  -> the call to action. "Finish your application / Your answers
+            carry over, so you only fill in what is missing."
+
+VERIFIED
+--------
+Rendered at 1280px and 390px with a dark stub in place of the iframe:
+no horizontal overflow at either width, no JS errors, panel border and
+shadow reading correctly against the band. Screenshot reviewed, not
+just diffed.
+
+IF FERRYLEND EVER ADDS A LIGHT THEME
+------------------------------------
+Delete the two inline background colours on the <section> and the
+container div, and drop the text colours back to the normal classes.
+The section is marked with a comment explaining why it is dark, so
+whoever touches it next knows it was a decision and not an accident.
+
+DEPLOY
+------
+Commit both files to main on wyngroupinc/Lendihubthankyouaffliate1.
