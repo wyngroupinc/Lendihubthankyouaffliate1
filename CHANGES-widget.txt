@@ -1,0 +1,66 @@
+LENDIHUB — LeadConnector chat widget added
+Built 31 Oct 2026
+
+WHAT CHANGED
+------------
+One script tag added immediately before </body> on all 12 pages:
+
+<!-- LeadConnector chat widget -->
+<script src="https://widgets.leadconnectorhq.com/loader.js"
+  data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+  data-widget-id="6ae626ed352513d0e7fd03d8" data-source="WEB_USER"></script>
+
+Verbatim, exactly as supplied. No other change to any file.
+Each file grew by exactly 250 characters. Nothing else was touched.
+
+NO CSS CHANGE. styles.css and vertical.css are unchanged and are not in
+this zip. Do not re-upload them.
+
+FILES (12)
+----------
+business.html          index.html             term-loans.html
+decline.html           line-of-credit.html    terms.html
+form.html              partners.html          thankyou-buyer.html
+                       privacy.html           thankyou.html
+                                              working-capital.html
+
+HOW TO DEPLOY
+-------------
+lendihub.com is served by Cloudflare Pages, project
+"lendihubthankyouaffliate1", which is GIT-CONNECTED to
+github.com/wyngroupinc/Lendihubthankyouaffliate1 on branch "main".
+Deployments on push are enabled.
+
+So: commit these 12 files to main. Cloudflare Pages builds and deploys
+automatically.
+
+Do NOT use Cloudflare Pages' manual/direct upload for this project. A
+git-connected project redeploys from the repo on the next push, which
+would silently overwrite a hand-uploaded file.
+
+VERIFICATION DONE
+-----------------
+- Widget script present exactly once per file (12/12).
+- Byte-for-byte match against the supplied snippet (12/12).
+- Placed as the last element inside <body> on every page.
+- index.html, form.html and thankyou.html rendered in Chromium at
+  1280x900: no JS errors, no horizontal overflow, page text intact.
+- Local copies were confirmed to match the live site before patching
+  (page titles, homepage H1, privacy policy "Last updated: October 29,
+  2026") so this does not regress anything currently live.
+
+TWO THINGS TO LOOK AT
+---------------------
+1. PRIVACY POLICY. The widget loads third-party JavaScript on every page
+   and collects whatever a visitor types into chat, including name and
+   phone number. privacy.html names the third parties who receive data;
+   LeadConnector / GoHighLevel is not among them. Worth adding before
+   this goes live, for the same reason the session-recording disclosure
+   was added on 8 Oct.
+
+2. form.html. The chat bubble floats bottom-right, which is where the
+   funnel's submit button and consent checkbox sit on mobile. If it
+   overlaps them it will cost conversions, and the consent block needs to
+   stay visible for TrustedForm. Load lendihub.com/form on a phone and
+   look before leaving the widget on that page. Removing it from that one
+   file is a one-line deletion.
