@@ -1,0 +1,81 @@
+LENDIHUB — SMS terms moved to its own page
+Built 31 Oct 2026
+
+WHAT CHANGED
+------------
+1. NEW PAGE: sms-terms.html
+   The block that was sitting under the form is now a proper legal page,
+   built from the terms.html shell so it matches privacy.html and
+   terms.html exactly. Nine sections: who sends, what we send, no
+   sharing, frequency and cost, how to stop, carriers, not a condition,
+   supported carriers, contact.
+
+2. form.html — the card is gone.
+   Replaced with one line of small grey print below the form:
+   "Lendihub may text you about your request. Message and data rates may
+   apply; message frequency varies; reply STOP to cancel, HELP for help.
+   See our SMS Terms, Privacy Policy and Terms of Use."
+
+3. ALL 13 PAGES — footer now carries an "SMS Terms" link, sitting
+   between "Terms of Use" and "Do Not Sell or Share My Personal
+   Information".
+
+NO CSS CHANGE. Stylesheets untouched and not in this zip.
+
+A BUG I CAUGHT AND FIXED
+------------------------
+My first attempt put the disclosure INSIDE <div id="leadcapture-form">,
+which is the div the LeadCapture embed writes the form into and that
+your MutationObserver watches. When the real form loaded it would very
+likely have wiped the disclosure, so it would have looked fine in a
+screenshot and been missing in production.
+
+It is now a sibling <section> AFTER the form section closes. Verified by
+simulating the embed overwriting that container: the disclosure survives.
+
+FILES (14)
+----------
+sms-terms.html  NEW
+form.html       card -> one line, footer link
+business.html · decline.html · index.html · line-of-credit.html ·
+partners.html · privacy.html · term-loans.html · terms.html ·
+thankyou-buyer.html · thankyou.html · working-capital.html
+                footer link only
+
+DEPLOY
+------
+Commit all 14 to main on wyngroupinc/Lendihubthankyouaffliate1.
+sms-terms.html is a new file — make sure it actually gets added.
+
+################################################################
+#  STILL LIVE AND STILL CONTRADICTORY                          #
+#                                                              #
+#  I re-checked the funnel. The consent text on the Email step #
+#  has NOT changed. It still reads:                            #
+#                                                              #
+#    "...calls and text messages (SMS and MMS) about business  #
+#     funding from Lendihub LLC, its parent company Wyn Group  #
+#     Inc, and one or more of the funding partners listed at   #
+#     lendihub.com/partners..."                                #
+#                                                              #
+#  Your privacy policy and terms are already live saying no    #
+#  third party texts you. Those two statements cannot both be  #
+#  true, and sms-terms.html makes the claim a third time on a  #
+#  page of its own.                                            #
+#                                                              #
+#  Fix the funnel consent, or tell me to revert the no-sharing #
+#  language. Either is fine. Leaving it as it is, is not.      #
+################################################################
+
+TRADE-OFF YOU SHOULD KNOW ABOUT
+-------------------------------
+Moving the detail off form.html means the compliance scanner reading
+lendihub.com/form sees only the one-line summary. That line still
+carries sender, rates, frequency, STOP, HELP and links to all three
+policies, so it may still satisfy most of the opt-in checks. If the
+review comes back still failing on the opt-in form, tell me and I will
+put a compact version of the detail back on the page in a way that does
+not look like the card you did not like.
+
+The two checkbox checks still cannot pass. Your funnel has no consent
+checkbox (showCheckbox = false). Unchanged from the last note.
