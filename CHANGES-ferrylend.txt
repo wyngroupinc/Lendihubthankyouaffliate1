@@ -1,0 +1,114 @@
+LENDIHUB — Ferrylend application embedded on the thank-you page
+Built 31 Oct 2026
+
+FILES (2): thankyou.html, thankyou-buyer.html  (kept identical mirrors)
+NO CSS CHANGE. Stylesheets untouched and not in this zip.
+
+NEW PAGE ORDER
+--------------
+  1. "You're almost done." + "Finish your application below."
+  2. THE FERRYLEND APPLICATION  <-- moved to the top, as you asked
+  3. "Have this ready" checklist (useful while they fill it in)
+  4. "When we call" + 855-781-9800 + the STOP note
+  5. Not-an-approval small print
+
+The three-step "what happens next" explainer is gone. It was telling
+people to sit and wait, which is the opposite of what the page now asks.
+
+HOW THE DATA GETS THERE
+-----------------------
+LeadCapture puts the answers in the URL -> thankyou.html captures them
+-> builds the Ferrylend iframe src from them.
+
+### YOU MUST FILL IN ONE TABLE ###
+
+Near the bottom of thankyou.html, find FERRYLEND_MAP. It looks like:
+
+    var FERRYLEND_MAP = {
+      "Name":          "",      <- first name
+      "Last Name":     "",
+      "Email":         "",
+      "Phone Number":  "",
+      ...
+    };
+
+LEFT side  = your LeadCapture field names. Already correct, taken
+             straight from the live funnel. Do not change these.
+RIGHT side = what Ferrylend calls the same field. YOU FILL THESE IN.
+
+Get them from Ferrylend support, or open ferrylend.com/apply/lendihub
+in a browser, right-click > View Source, and read the name="..." on
+each input.
+
+Ferrylend's apply page blocks automated reading, so I could not look
+them up and I was not willing to guess. Until you fill the table in,
+the form loads and works normally, it just does not pre-fill. Nothing
+breaks in the meantime.
+
+Edit only the right-hand side, keep the quotes, save, redeploy.
+
+FERRYLEND_FORWARD_UNMAPPED is set to false. Flip it to true if you want
+every unlisted parameter passed through under its own name as well.
+Leave it false until you know Ferrylend ignores parameters it does not
+recognise.
+
+A PRIVACY PROBLEM I FIXED WHILE BUILDING THIS
+---------------------------------------------
+This page runs your Meta Pixel. Had the lead data simply sat in the
+address bar, the pixel would have sent the full URL to Meta on every
+page view -- names, phone numbers, email addresses and revenue figures,
+straight into Meta. That breaks Meta's own rules and it is not covered
+by your privacy policy.
+
+So the very first script in <head>, BEFORE the pixel loads, reads the
+query string into memory and then wipes it out of the address bar with
+history.replaceState. The pixel sees a clean URL. The data is still
+available to build the iframe.
+
+Verified: arriving at the page with eight parameters leaves the address
+bar reading "thankyou.html" with no query string at all, while the
+iframe still receives every mapped value.
+
+Side benefit: the data is no longer in browser history or in the
+referrer header, and it will not be read back by anyone who hits the
+back button on a shared computer.
+
+WHAT YOU STILL HAVE TO SWITCH ON IN LEADCAPTURE
+-----------------------------------------------
+None of this does anything until LeadCapture actually puts the answers
+in the URL. On the redirect that sends people to lendihub.com/thankyou,
+"include field params" has to be ON.
+
+That setting is safe here precisely because the destination is your own
+domain, and because this page wipes the URL on arrival.
+
+I have not touched it. Say the word and I will set it.
+
+ALSO WORTH CHECKING: your old notes say LeadProsper does a dynamic
+redirect to /thinkbig-thankyou. I do not know whether that is still how
+people arrive. Both thankyou.html and thankyou-buyer.html carry the
+application now, but if merchants land on /thinkbig-thankyou, that page
+needs the same file or the redirect needs repointing.
+
+VERIFICATION DONE
+-----------------
+- All 4 inline scripts pass node --check.
+- The scrub script sits at byte 617; fbq init at 4866. It runs first.
+- Loaded the page with 8 real-shaped parameters:
+    address bar afterwards  -> "thankyou.html", no query string
+    iframe src, map empty   -> plain base URL, no stray parameters
+    iframe src, map filled  -> ...?first_name=Marcus&last_name=Toledo
+                               &email=...&phone=...&business_name=...
+                               &state=TX&amount=75000&monthly_revenue=48000
+  fbclid was correctly dropped rather than forwarded.
+- Zero JavaScript errors in either case.
+
+Ferrylend's own resize/scroll script is included verbatim, unmodified,
+including its origin check.
+
+ONE THING FOR YOUR PRIVACY POLICY
+---------------------------------
+Section 5 names who receives applicant information. Ferrylend is now in
+that path and is not named. It is your own system rather than a buyer,
+so it belongs in the service-provider part, not the partner list. Tell
+me and I will add it.
