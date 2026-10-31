@@ -1,0 +1,96 @@
+LENDIHUB — funnel now hands off to the thank-you page with data
+Built 31 Oct 2026
+
+FILES (2): thankyou.html, thankyou-buyer.html  (identical mirrors)
+NO CSS CHANGE.
+
+DONE IN LEADCAPTURE (already live, nothing for you to do)
+---------------------------------------------------------
+Redirect set on the "Email" step, the final submit:
+    destination          https://lendihub.com/thankyou
+    include field params ON   <- this is what carries the answers
+    carry UTMs           ON
+    delay                1 second
+
+Set on the Email step, not the transition step: "Submit Transition" no
+longer exists on your funnel. You removed it at some point, which is
+exactly why merchants were ending on LeadCapture's own thank-you screen
+and never reaching your page. That is now bypassed entirely -- your page
+is the thank-you page.
+
+Webhook to Ferrylend: still active, unchanged, fires independently.
+
+DONE IN THESE FILES
+-------------------
+1. FERRYLEND_MAP filled in with Ferrylend's own field names, taken from
+   the Website Intake screen:
+       Name                     -> first_name
+       Last Name                -> last_name
+       Email                    -> email
+       Phone Number             -> phone
+       Business Name            -> business_name
+       state                    -> state
+       requested_loan_amount    -> amount_requested
+       Monthly Business Revenue -> monthly_revenue
+
+   Still blank on purpose: time in business, credit band, industry,
+   entity type, use of funds, outstanding loans. Those are answer bands
+   ("2-4 Years") and the application asks for real values (a start
+   date). Sending a band into a date field is how you get the empty
+   "TIME IN BUSINESS" you already saw on the test lead.
+
+2. The URL scrub got smarter. It now KEEPS ad-tracking parameters
+   (fbclid, utm_*, gclid, ttclid, msclkid and friends) and strips only
+   the merchant's personal answers.
+
+   The first version wiped the whole query string, which protected the
+   data but would have thrown away fbclid before your Meta Pixel read
+   it. That was my mistake and it would have quietly hurt attribution.
+
+3. A diagnostic was added. On page load the console prints the NAMES of
+   every parameter received -- names only, never values. Open the
+   thank-you page with devtools on and you see exactly what LeadCapture
+   is sending, which is how you correct the map if anything is off.
+
+VERIFIED
+--------
+Loaded the page with 12 realistic parameters:
+  address bar after    ?fbclid=ABC123&utm_source=facebook&utm_campaign=broad
+  PII left in the URL  none
+  iframe src           .../apply/lendihub?first_name=Marcus&last_name=Toledo
+                       &email=...&phone=%2B18035551234&business_name=Acme+Auto
+                       &state=TX&amount_requested=75000&monthly_revenue=48000
+  console              [Lendihub] parameters received: [Name, Last Name, ...]
+  JS errors            none
+
+THE ONE THING I COULD NOT VERIFY
+--------------------------------
+Whether ferrylend.com/apply/lendihub actually accepts these as URL
+parameters. The names come from the Website Intake API on the same
+platform, which is strong evidence but not proof -- an API and a page's
+query string can use different names.
+
+If prefill does not work, open the thank-you page in devtools, read the
+parameter names in the console, and compare against what the apply page
+wants. Each correction is one line in FERRYLEND_MAP. Nothing breaks
+either way: an unrecognised parameter is ignored, and the merchant just
+types the field themselves.
+
+The "Link your Apply button" tab in Ferrylend settings is the fastest
+place to confirm the real names.
+
+TEST THE WHOLE CHAIN
+--------------------
+Submit one real lead through the funnel and check four things:
+
+  1. You land on lendihub.com/thankyou, not LeadCapture's screen.
+  2. The embedded application has your name and business filled in.
+  3. The lead is already in Ferrylend, from the webhook.
+  4. Finishing the application UPDATES that lead rather than creating a
+     second one. Ferrylend says it dedupes on email, phone or EIN, but
+     that note is on the intake card and I have not seen it proven for
+     the apply form. Worth confirming with one real run.
+
+DEPLOY
+------
+Commit both files to main on wyngroupinc/Lendihubthankyouaffliate1.
