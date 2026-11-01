@@ -1,0 +1,103 @@
+LENDIHUB — why the prefill did not work, and the fix
+Built 1 Nov 2026
+
+FILES (2): thankyou.html, thankyou-buyer.html   NO CSS CHANGE.
+
+WHAT WENT WRONG
+---------------
+Two faults, both mine.
+
+1. THE SWITCH ALONE DOES NOTHING.
+   LeadCapture's own documentation: enabling "Include Form Data in URL"
+   opens a FIELD MAPPER, and you then pick which fields go into the URL.
+   Nothing is selected by default.
+
+   The API I used only has an on/off flag. There is no parameter for
+   choosing the fields. So I flipped the switch and the list behind it
+   stayed empty, and your URL arrived carrying nothing. I should have
+   checked the documentation before telling you it was wired up.
+
+2. I GUESSED THE PARAMETER NAMES WRONG.
+   LeadCapture builds each parameter name from the field LABEL in
+   snake_case. "Phone Number" becomes phone_number. I had mapped
+   against the funnel's internal field names instead, so even with
+   fields selected, most would not have matched.
+
+WHAT I CHANGED
+--------------
+IN LEADCAPTURE (live already):
+  - Redirect moved OFF the "Email" step and ONTO the "Thank You 17"
+    step, which is where the builder exposes redirect settings. It was
+    on a step whose redirect panel the UI does not show, so you could
+    not have found it to fix the field selection.
+  - Destination https://lendihub.com/thankyou, 2 second delay,
+    UTMs carried, include-field-data ON.
+
+IN THESE FILES:
+  The prefill map now matches keys LOOSELY. Case, spaces, hyphens and
+  underscores are ignored, and several spellings are listed per field.
+  Tested against three different naming conventions -- LeadCapture's
+  snake_case default, Ferrylend's own names, and the raw field names --
+  and all three produce the identical correct result.
+
+  Practically: you do not need to rename anything in the mapper. Accept
+  the defaults and it will work.
+
+### WHAT YOU HAVE TO DO -- THIS IS THE PART THAT UNBLOCKS IT ###
+
+Open the funnel in the LeadCapture builder:
+
+  1. Select the "Thank You 17" step.
+  2. Find Redirect After Submission. It is on, pointing at
+     https://lendihub.com/thankyou.
+  3. Find "Include Form Data in URL". It is on, and underneath it is a
+     field mapper listing every field in the funnel.
+  4. TICK THESE EIGHT:
+         First Name
+         Last Name
+         Email
+         Phone Number
+         Business Name
+         State
+         Loan Amount
+         Monthly Business Revenue
+     Leave the parameter names at their defaults.
+  5. The builder shows a LIVE URL PREVIEW underneath. It should now
+     show the parameters. If it is still bare, nothing is ticked.
+
+Do NOT tick time in business, credit score, industry, entity type, use
+of funds or outstanding loans. Those are answer bands and the
+application wants real values -- that is what produced the empty
+TIME IN BUSINESS on your test lead.
+
+THEN TEST
+---------
+Submit one lead. On the thank-you page open devtools, Console. You will
+see one of:
+
+  [Lendihub] forwarded to Ferrylend: ["first_name -> first_name", ...]
+      -> the handoff worked.
+
+  [Lendihub] forwarded to Ferrylend: (nothing)
+  [Lendihub] not in the map, ignored: [...]
+      -> the names arrived but are spelled differently. Send me that
+         list and each fix is one line.
+
+  no [Lendihub] line at all
+      -> nothing reached the page. The fields are still not ticked.
+
+The address bar will look clean either way -- the page deliberately
+strips the personal data out of the URL before your Meta Pixel reads
+it. Judge it by the console, not by the address bar.
+
+ONE SIDE EFFECT
+---------------
+The redirect now sits on the Thank You step with a 2 second delay, so
+merchants briefly see LeadCapture's own thank-you screen before landing
+on your page. Worth changing that screen's text to something like
+"Thanks. Taking you to your application..." so the two seconds read as
+intentional.
+
+DEPLOY
+------
+Commit both files to main on wyngroupinc/Lendihubthankyouaffliate1.

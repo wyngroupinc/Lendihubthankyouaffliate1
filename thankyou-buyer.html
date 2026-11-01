@@ -117,52 +117,77 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
 /* ==================================================================
    FERRYLEND PREFILL MAP
 
-   LEFT  = the parameter name LeadCapture puts in the URL
-           (these are your funnel's field names, exactly as they are)
+   LEFT  = the parameter name that arrives in the URL from LeadCapture
    RIGHT = the parameter name Ferrylend's apply page expects
 
-   Fill in the right-hand side. An empty string means "do not send".
-   Get the names from Ferrylend support, or open
-   ferrylend.com/apply/lendihub and read the name="..." on each input.
+   Key matching is LOOSE: case, spaces, hyphens and underscores are all
+   ignored, so "First Name", "first_name" and "FirstName" all hit the
+   same entry. Several spellings are listed for each field on purpose,
+   because LeadCapture names a parameter from the field LABEL in
+   snake_case by default, and that can be renamed in the builder.
+
+   An unlisted parameter is simply not forwarded.
    ================================================================== */
 var FERRYLEND_MAP = {
-  "Name":                               "first_name",
-  "Last Name":                          "last_name",
-  "Email":                              "email",
-  "Phone Number":                       "phone",
-  "Business Name":                      "business_name",
-  "state":                              "state",
-  "requested_loan_amount":              "amount_requested",
-  "Monthly Business Revenue":           "monthly_revenue",
-  "Time In Business":                   "",
-  "Business Category":                  "",
-  "Business Type":                      "",
-  "Reasons For Fund":                   "",
-  "What Is Your Current Credit Score?": "",
-  "outstanding business loans":         ""
+  "first_name":               "first_name",
+  "name":                     "first_name",
+  "last_name":                "last_name",
+  "email":                    "email",
+  "phone":                    "phone",
+  "phone_number":             "phone",
+  "mobile_phone":             "phone",
+  "business_name":            "business_name",
+  "legal_business_name":      "business_name",
+  "state":                    "state",
+  "business_state":           "state",
+  "loan_amount":              "amount_requested",
+  "amount_requested":         "amount_requested",
+  "requested_loan_amount":    "amount_requested",
+  "monthly_revenue":          "monthly_revenue",
+  "monthly_business_revenue": "monthly_revenue",
+  "average_monthly_revenue":  "monthly_revenue"
 };
 
-/* true = ALSO pass through any parameter not listed above, under its own
-   name. Leave false until you know Ferrylend ignores unknown parameters. */
+/* true = also pass through anything not listed above, under its own name. */
 var FERRYLEND_FORWARD_UNMAPPED = false;
 
 (function(){
   var BASE  = "https://ferrylend.com/apply/lendihub";
   var frame = document.querySelector('iframe[data-apply-embed]');
   if (!frame) return;
+
+  function norm(k){
+    return String(k).toLowerCase()
+      .replace(/[\s\-]+/g, "_")
+      .replace(/[^a-z0-9_]/g, "");
+  }
+
+  /* normalise the map once, so lookups are spelling-insensitive */
+  var LOOKUP = {};
+  for (var k in FERRYLEND_MAP) {
+    if (Object.prototype.hasOwnProperty.call(FERRYLEND_MAP, k)) {
+      LOOKUP[norm(k)] = FERRYLEND_MAP[k];
+    }
+  }
+
   var incoming;
   try { incoming = new URLSearchParams(window.__LH_LEAD || ""); } catch(e){ return; }
 
-  var out = new URLSearchParams();
+  var out = new URLSearchParams(), matched = [], ignored = [];
   incoming.forEach(function(value, key){
     if (!value) return;
-    if (Object.prototype.hasOwnProperty.call(FERRYLEND_MAP, key)) {
-      var target = FERRYLEND_MAP[key];
-      if (target) out.set(target, value);
-    } else if (FERRYLEND_FORWARD_UNMAPPED) {
-      out.set(key, value);
-    }
+    var target = LOOKUP[norm(key)];
+    if (target) { out.set(target, value); matched.push(key + " -> " + target); }
+    else if (FERRYLEND_FORWARD_UNMAPPED) { out.set(key, value); }
+    else { ignored.push(key); }
   });
+
+  /* Names only, never values. Open devtools on this page to see whether
+     the handoff worked and which parameters went unused. */
+  if (window.console && console.log) {
+    console.log("[Lendihub] forwarded to Ferrylend:", matched.length ? matched : "(nothing)");
+    if (ignored.length) console.log("[Lendihub] not in the map, ignored:", ignored);
+  }
 
   var qs = out.toString();
   if (qs) frame.src = BASE + "?" + qs;   /* leave the plain src alone when nothing maps */
