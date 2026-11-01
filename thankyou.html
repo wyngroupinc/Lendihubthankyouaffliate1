@@ -103,7 +103,28 @@
     .fl-ring{ animation:none; }
     .fl-frame,.fl-loader{ transition:none; }
   }
+
+  /* ---- arrival screen: bridges the moment between hitting submit on the
+         funnel and this page appearing. Removed by JS; the CSS animation is
+         a backstop so it can never strand someone. ---- */
+  #lh-boot{ position:fixed; inset:0; z-index:99998; display:flex;
+            flex-direction:column; align-items:center; justify-content:center;
+            gap:18px; background:#0B1220; text-align:center; padding:24px;
+            animation:lhboot 3s ease forwards; }
+  #lh-boot.is-gone{ opacity:0; pointer-events:none; }
+  #lh-boot .lh-boot__ring{ width:46px; height:46px; border-radius:50%;
+            border:3px solid rgba(255,255,255,.12); border-top-color:#49A06C;
+            animation:flspin .85s linear infinite; }
+  #lh-boot .lh-boot__title{ color:#FFFFFF; font-size:19px; font-weight:700; margin:0; }
+  #lh-boot .lh-boot__sub{ color:#8DA0B8; font-size:14px; margin:0; }
+  #lh-boot{ transition:opacity .45s ease; }
+  @keyframes lhboot{ 0%,70%{ opacity:1 } 100%{ opacity:0; visibility:hidden } }
+  @media (prefers-reduced-motion: reduce){
+    #lh-boot{ animation-duration:1.2s; }
+    #lh-boot .lh-boot__ring{ animation:none; }
+  }
   </style>
+  <noscript><style>#lh-boot{ display:none !important; }</style></noscript>
 
 <!-- Meta Pixel Code -->
 <script>
@@ -124,6 +145,60 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code -->
 </head>
 <body>
+
+<!-- Arrival screen. Shown only when the visitor actually came from the funnel. -->
+<div id="lh-boot" role="status" aria-live="polite">
+  <div class="lh-boot__ring"></div>
+  <p class="lh-boot__title">Processing your application</p>
+  <p class="lh-boot__sub">This takes a few seconds.</p>
+</div>
+<script>
+(function(){
+  var el = document.getElementById("lh-boot");
+  if (!el) return;
+
+  function unlock(){ try { document.documentElement.style.overflow = ""; } catch(e){} }
+
+  function fadeOut(){
+    /* the CSS backstop animation outranks a class change, so clear it first */
+    el.style.animation = "none";
+    el.classList.add("is-gone");
+    unlock();
+    setTimeout(function(){ if (el.parentNode) el.parentNode.removeChild(el); }, 500);
+  }
+
+  function dismiss(delay){
+    if (!delay) {                      /* nothing to wait for: drop it immediately */
+      if (el.parentNode) el.parentNode.removeChild(el);
+      unlock();
+      return;
+    }
+    setTimeout(fadeOut, delay);
+  }
+
+  /* Did they actually just submit? Either LeadCapture passed their answers
+     through, or they came from the funnel. A direct visit or a refresh
+     should not sit through a wait that means nothing. */
+  var cameFromFunnel = false;
+  try {
+    var ref = document.referrer || "";
+    cameFromFunnel = !!(window.__LH_LEAD && window.__LH_LEAD.length) ||
+                     /leadcapture\.io/i.test(ref) ||
+                     /\/form\b/i.test(ref);   /* the funnel is embedded at lendihub.com/form */
+  } catch(e){}
+
+  /* Only once per session, so a refresh goes straight to the page. */
+  try {
+    if (cameFromFunnel && sessionStorage.getItem("lh_boot_seen")) cameFromFunnel = false;
+    else if (cameFromFunnel) sessionStorage.setItem("lh_boot_seen", "1");
+  } catch(e){}
+
+  if (!cameFromFunnel) { dismiss(0); return; }
+
+  try { document.documentElement.style.overflow = "hidden"; } catch(e){}
+  dismiss(1900);
+})();
+</script>
 
 <!-- NAV -->
 <nav class="nav">
