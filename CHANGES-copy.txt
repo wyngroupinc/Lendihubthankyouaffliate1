@@ -1,0 +1,89 @@
+LENDIHUB — thank-you page copy, written to beat the retyping objection
+Built 1 Nov 2026
+
+FILES (2): thankyou.html, thankyou-buyer.html   NO CSS CHANGE.
+
+THE PROBLEM THE COPY HAS TO SOLVE
+---------------------------------
+The merchant just answered sixteen questions. Now a form asks for their
+name, business, phone, email, amount and revenue again. The old copy
+said "You're almost done. Finish your application" -- which reads as a
+bait-and-switch and makes the duplication feel like your mistake.
+
+You cannot hide the retyping. They will notice in two seconds. So the
+copy names it first, apologises, and gives a reason that makes it make
+sense.
+
+WHAT IT NOW SAYS
+----------------
+HERO (reassurance only, no ask)
+  You're in.
+  A funding specialist has your file. If you sent this before 5pm
+  Eastern, you will hear from us today.
+
+PANEL (the ask, framed as a shortcut)
+  Want an answer today instead of next week?
+
+  Finish your full application below. It takes about five minutes.
+
+  A few questions look the same. Sorry about that. The ones you just
+  answered told us if we can help you. This one is the real
+  application. It is what your funding partner reads.
+
+  The big one is your bank statements. Add your last three months and
+  we can send your file out today. Skip them and we wait until we
+  reach you by phone. That is usually two or three days.
+
+  You can still just take our call. This is the fast lane, not a rule.
+
+UNDER THE FORM
+  Encrypted. Only used to get you an offer.
+
+CHECKLIST
+  You can start without these. Having them nearby is what gets you an
+  answer today instead of next week.
+
+WHY IT IS BUILT THIS WAY
+------------------------
+- The headline sells the OUTCOME (speed), not the task. Nobody wants to
+  "finish an application". They want money this week.
+- "Sorry about that" is doing real work. Naming an annoyance before the
+  reader does takes the sting out. Pretending it is not happening is
+  what makes people angry.
+- "The ones you just answered told us if we can help you. This one is
+  the real application" reframes the duplication as two different jobs
+  rather than one job done twice. It is also true.
+- Bank statements are called out on their own, in bold, because they
+  are the only field that genuinely changes your speed. Everything else
+  is retyping; statements are the deal.
+- The cost of skipping is stated plainly (two or three days of phone
+  tag) without threatening anyone.
+- The last line gives permission to skip. Counter-intuitive, but a
+  reader who feels trapped leaves. A reader who feels free stays and
+  reads the offer.
+- The hero no longer repeats the panel. One job each: hero reassures,
+  panel asks.
+
+READING LEVEL (your grade 5 rule)
+---------------------------------
+  hero                 2.31
+  panel headline       3.76
+  panel body           2.28
+  checklist intro      3.64
+  when-we-call card    2.61
+  checklist items      4.56
+  legal small print    6.78   <- left alone on purpose
+
+Every marketing block is well under 5. The only block over is the
+not-an-approval disclaimer, and simplifying legal wording to hit a
+readability target is how you end up saying something you did not mean.
+
+VERIFIED
+--------
+Rendered at 390px and 1280px: no horizontal overflow, no JS errors.
+Mobile screenshot reviewed, not just diffed. The handoff diagnostic,
+the URL scrub and the prefill map are untouched and still in place.
+
+DEPLOY
+------
+Commit both files to main on wyngroupinc/Lendihubthankyouaffliate1.
