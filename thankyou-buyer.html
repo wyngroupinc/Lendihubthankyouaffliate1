@@ -14,21 +14,23 @@
     /* Keep ad-tracking parameters in the URL so Meta/Google attribution still
        works. Strip everything else (the merchant's answers) before the pixel
        below reads location.href. */
-    var KEEP = /^(utm_|fbclid$|fbc$|fbp$|gclid$|gbraid$|wbraid$|ttclid$|msclkid$|li_fat_id$|twclid$|ScCid$|gad_source$)/i;
+    var KEEP = /^(lhdebug$|utm_|fbclid$|fbc$|fbp$|gclid$|gbraid$|wbraid$|ttclid$|msclkid$|li_fat_id$|twclid$|ScCid$|gad_source$)/i;
     try{
       var qs = window.location.search;
       window.__LH_LEAD = (qs && qs.length > 1) ? qs.slice(1) : "";
       if (!window.__LH_LEAD) return;
 
+      window.__LH_DEBUG = /(^|&)lhdebug=1(&|$)/.test(window.__LH_LEAD);
       var incoming = new URLSearchParams(window.__LH_LEAD);
       var keep = new URLSearchParams(), names = [];
       incoming.forEach(function(v, k){
-        names.push(k);
+        if (k !== "lhdebug") names.push(k);
         if (KEEP.test(k)) keep.set(k, v);
       });
 
       /* Key names only, never values. Open the console on this page to see
          exactly what LeadCapture sent, so FERRYLEND_MAP can be corrected. */
+      window.__LH_NAMES = names;
       if (window.console && console.log) console.log("[Lendihub] parameters received:", names);
 
       if (window.history && history.replaceState) {
@@ -173,9 +175,10 @@ var FERRYLEND_FORWARD_UNMAPPED = false;
   var incoming;
   try { incoming = new URLSearchParams(window.__LH_LEAD || ""); } catch(e){ return; }
 
+  var names = window.__LH_NAMES || [];
   var out = new URLSearchParams(), matched = [], ignored = [];
   incoming.forEach(function(value, key){
-    if (!value) return;
+    if (!value || key === "lhdebug") return;
     var target = LOOKUP[norm(key)];
     if (target) { out.set(target, value); matched.push(key + " -> " + target); }
     else if (FERRYLEND_FORWARD_UNMAPPED) { out.set(key, value); }
@@ -191,6 +194,32 @@ var FERRYLEND_FORWARD_UNMAPPED = false;
 
   var qs = out.toString();
   if (qs) frame.src = BASE + "?" + qs;   /* leave the plain src alone when nothing maps */
+
+  /* Add ?lhdebug=1 to the page URL to see this on screen, no devtools needed.
+     Visible only to whoever puts that in the URL; invisible to merchants. */
+  if (window.__LH_DEBUG) {
+    var esc = function(t){ var d = document.createElement("div"); d.textContent = t; return d.innerHTML; };
+    var box = document.createElement("div");
+    box.style.cssText = "position:fixed;left:0;right:0;bottom:0;z-index:99999;background:#0B1220;" +
+      "color:#D7E2F0;font:12px/1.55 ui-monospace,Menlo,Consolas,monospace;padding:14px 16px;" +
+      "border-top:2px solid #49A06C;max-height:46vh;overflow:auto;box-shadow:0 -8px 24px rgba(0,0,0,.4)";
+    var verdict = matched.length
+      ? '<b style="color:#7FD4A0">HANDOFF OK &mdash; ' + matched.length + ' field(s) sent to Ferrylend.</b>' +
+        '<br>If the form above is still blank, Ferrylend is ignoring URL parameters. That is their end, not yours.'
+      : '<b style="color:#FFB4A2">NOTHING WAS SENT.</b><br>' +
+        (names.length
+          ? 'Parameters did arrive, but none matched the map. See &ldquo;ignored&rdquo; below.'
+          : 'No parameters reached this page at all &mdash; the fields are not ticked in the LeadCapture field mapper.');
+    box.innerHTML =
+      '<div style="color:#7FD4A0;font-weight:700;letter-spacing:.06em;margin-bottom:8px">LENDIHUB HANDOFF CHECK</div>' +
+      verdict +
+      '<div style="margin-top:10px"><b>received:</b> ' + esc(JSON.stringify(names)) + '</div>' +
+      '<div><b>forwarded:</b> ' + esc(JSON.stringify(matched)) + '</div>' +
+      '<div><b>ignored:</b> ' + esc(JSON.stringify(ignored)) + '</div>' +
+      '<div style="margin-top:8px;word-break:break-all"><b>iframe src:</b> ' + esc(frame.src) + '</div>' +
+      '<div style="margin-top:10px;color:#7A8CA3">Screenshot this and send it over. Remove ?lhdebug=1 to hide.</div>';
+    (document.body || document.documentElement).appendChild(box);
+  }
 })();
 </script>
 

@@ -1,0 +1,56 @@
+LENDIHUB — on-page handoff diagnostic
+Built 1 Nov 2026
+
+FILES (2): thankyou.html, thankyou-buyer.html   NO CSS CHANGE.
+
+WHY
+---
+"Didn't work" can mean three completely different problems with three
+different fixes, and I have no way to see your browser. This puts the
+answer on the screen so neither of us has to guess.
+
+HOW TO USE IT
+-------------
+Deploy these, then open:
+
+  https://lendihub.com/thankyou?lhdebug=1&first_name=Test&last_name=Merchant&email=test%40example.com&phone=%2B18035551234&business_name=Test%20Company&state=FL&loan_amount=75000&monthly_business_revenue=48000
+
+A dark bar appears at the bottom of the page with the verdict.
+Screenshot it and send it to me. No devtools needed.
+
+It only ever shows when ?lhdebug=1 is in the URL. Merchants never see
+it. Verified.
+
+WHAT THE THREE ANSWERS MEAN
+---------------------------
+"HANDOFF OK - 8 field(s) sent to Ferrylend"
+    Your side works. If the form above it is still blank, Ferrylend's
+    apply page ignores URL parameters. Nothing I can fix in code; it
+    becomes an email to them. The "iframe src" line in the panel is the
+    proof to send them.
+
+"NOTHING WAS SENT - parameters did arrive, but none matched"
+    LeadCapture is naming them something I did not anticipate. The
+    "received" list shows the real names. Send it and each fix is one
+    line in the map.
+
+"NOTHING WAS SENT - no parameters reached this page at all"
+    The eight fields are still not ticked in the LeadCapture field
+    mapper, on the Thank You 17 step. That is the fix.
+
+TESTED
+------
+All three states reproduced locally and the panel gave the right
+verdict for each. Confirmed invisible without the flag. No JS errors.
+All four inline scripts pass node --check.
+
+A NOTE ON THE LAST ROUND
+------------------------
+The previous build had a fault I introduced: the debug flag counted
+itself as lead data, so a page with no real parameters reported
+"parameters did arrive" instead of "none reached this page" - exactly
+the wrong diagnosis for the most likely case. Fixed and retested.
+
+DEPLOY
+------
+Commit both files to main on wyngroupinc/Lendihubthankyouaffliate1.
