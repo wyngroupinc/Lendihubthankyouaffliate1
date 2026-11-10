@@ -96,5 +96,17 @@ footer .disc{margin:0;font-size:11.5px;line-height:1.5;color:#7A838E;max-width:7
   </footer>
 </div></main>
 
+
+<script>
+/* Declined visitors must not be able to back-button into the form and change an answer. */
+(function(){
+  try{
+    history.pushState(null, document.title, location.href);
+    window.addEventListener('popstate', function(){
+      history.pushState(null, document.title, location.href);
+    });
+  }catch(e){}
+})();
+</script>
 </body>
 </html>
