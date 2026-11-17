@@ -30,6 +30,29 @@ fbq('trackCustom', 'ViewBusiness');
 src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
+<style>
+/* scoped: lendihub home visuals */
+.lh-hero{background:var(--cream,#f7f3ec);overflow:hidden;border-bottom:1px solid var(--border,#e7e2d9);}
+.lh-hero__grid{display:grid;grid-template-columns:1.08fr .92fr;gap:28px;align-items:end;
+  max-width:1120px;margin:0 auto;padding:0 20px;}
+.lh-hero__copy{text-align:left;padding:58px 0 52px;}
+.lh-hero__copy .trust-row{justify-content:flex-start;}
+.lh-hero__art{display:flex;justify-content:center;align-items:flex-end;align-self:end;}
+.lh-hero__art img{display:block;width:auto;max-width:100%;max-height:520px;height:auto;
+  filter:drop-shadow(0 16px 30px rgba(20,32,28,.12));}
+@media (max-width:880px){
+  .lh-hero__grid{grid-template-columns:1fr;gap:0;}
+  .lh-hero__copy{text-align:center;padding:46px 0 8px;}
+  .lh-hero__copy .trust-row{justify-content:center;}
+  .lh-hero__art img{max-height:300px;}
+}
+.lh-shots{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.lh-shots figure{margin:0;border-radius:var(--radius-lg,16px);overflow:hidden;
+  border:1px solid var(--border,#e7e2d9);line-height:0;}
+.lh-shots img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:1/1;}
+@media (max-width:620px){.lh-shots{grid-template-columns:1fr;}}
+.lh-chips{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;}
+</style>
 </head>
 <body>
 
@@ -46,19 +69,27 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
 </div>
 
 
-<!-- ============ 1. HERO - THE OFFER, STRAIGHT ============ -->
-<section class="section--sm" style="padding-top:60px;padding-bottom:10px;">
-  <div class="container--narrow text-center">
-    <div class="mb-16"><span class="badge badge--green"><span class="dot dot--green"></span> Business funding</span></div>
-    <h1 class="heading heading--xl mb-14">Business funding up to <span style="color:var(--green);text-decoration:underline;text-decoration-color:rgba(52,192,148,.4);text-underline-offset:6px;text-decoration-thickness:3px;">$1,000,000</span>.</h1>
-    <p class="subhead mb-14">Open a year or more. $20,000 a month in deposits. Three months of bank statements is the whole application.</p>
-    <p class="body-text mb-24" style="max-width:600px;margin-left:auto;margin-right:auto;">Answer a few questions and see what your numbers support. Free to check, and nothing is binding.</p>
-    <a href="form.html" class="btn btn--navy btn--pulse" style="font-size:19px;">See My Funding Options &rarr;</a>
-    <p class="btn-sub">About 60 seconds. Free.</p>
-    <div class="trust-row mt-24">
-      <span class="trust-item"><svg class="trust-check" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> No cost to check</span>
-      <span class="trust-item"><svg class="trust-check" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> We do not pull your credit</span>
-      <span class="trust-item"><svg class="trust-check" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Nothing binding</span>
+<!-- ============ 1. HERO ============ -->
+<section class="lh-hero">
+  <div class="lh-hero__grid">
+    <div class="lh-hero__copy">
+      <div class="mb-16"><span class="badge badge--green"><span class="dot dot--green"></span> Business funding</span></div>
+      <h1 class="heading heading--xl mb-14">Business funding up to <span style="color:var(--green);text-decoration:underline;text-decoration-color:rgba(52,192,148,.4);text-underline-offset:6px;text-decoration-thickness:3px;">$1,000,000</span>.</h1>
+      <p class="subhead mb-14">Open a year or more. $20,000 a month in deposits. Three months of bank statements is the whole application.</p>
+      <p class="body-text mb-24">Answer a few questions and see what your numbers support. Free to check, and nothing is binding.</p>
+      <a href="form.html" class="btn btn--navy btn--pulse" style="font-size:19px;">See My Funding Options &rarr;</a>
+      <p class="btn-sub">About 60 seconds. Free.</p>
+      <div class="trust-row mt-24">
+        <span class="trust-item"><svg class="trust-check" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> No cost to check</span>
+        <span class="trust-item"><svg class="trust-check" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> We do not pull your credit</span>
+        <span class="trust-item"><svg class="trust-check" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Nothing binding</span>
+      </div>
+    </div>
+    <div class="lh-hero__art">
+      <picture>
+        <source srcset="images/owner-hero.webp" type="image/webp">
+        <img src="images/owner-hero.png" width="416" height="880" alt="Small business owner standing in her shop" loading="eager" decoding="async">
+      </picture>
     </div>
   </div>
 </section>
@@ -106,6 +137,32 @@ src="https://www.facebook.com/tr?id=1633322521033328&ev=PageView&noscript=1"
     <div class="text-center mt-32">
       <a href="form.html" class="btn btn--navy">See My Funding Options &rarr;</a>
       <p class="small-text mt-14">Not all businesses qualify. Amount and terms are set by the funding partner.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ WHO WE FUND ============ -->
+<section class="section">
+  <div class="container--mid">
+    <p class="label text-center mb-10">Who we fund</p>
+    <h2 class="heading heading--md text-center mb-14">Businesses that take money over a counter.</h2>
+    <p class="subhead text-center mb-32" style="max-width:580px;margin-left:auto;margin-right:auto;">If deposits land in your account every week, your numbers are the kind funding partners read fastest.</p>
+
+    <div class="lh-shots mb-32">
+      <figure><img src="images/owner-cafe.jpg" width="760" height="760" alt="Owner behind the counter of a coffee shop" loading="lazy" decoding="async"></figure>
+      <figure><img src="images/owner-kitchen.jpg" width="760" height="760" alt="Owner in an apron in a restaurant kitchen" loading="lazy" decoding="async"></figure>
+    </div>
+
+    <div class="lh-chips">
+      <span class="badge badge--green">Restaurants and food</span>
+      <span class="badge badge--green">Auto and body shops</span>
+      <span class="badge badge--green">HVAC, plumbing, electrical</span>
+      <span class="badge badge--green">Landscaping</span>
+      <span class="badge badge--green">Medical and dental</span>
+      <span class="badge badge--green">Salons and nail shops</span>
+      <span class="badge badge--green">Grocery and retail</span>
+      <span class="badge badge--green">Trucking and contractors</span>
     </div>
   </div>
 </section>
