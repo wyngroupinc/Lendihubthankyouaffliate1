@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>One step left: upload your bank statements | Lendihub</title>
+<style>
+  :root {
+    --ink: #0e1b2c;
+    --ink-soft: #46556a;
+    --paper: #f4f1ea;
+    --card: #ffffff;
+    --line: #e2ddd2;
+    --alert: #b4310f;
+    --alert-bg: #fdeee8;
+    --go: #0f7a4d;
+    --go-bg: #e6f4ec;
+    --hold: #9a6a00;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.5;
+  }
+  .status-bar {
+    background: var(--alert);
+    color: #fff;
+    text-align: center;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: .01em;
+    padding: 10px 16px;
+  }
+  .status-bar .dot {
+    display: inline-block;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: #ffd9a8;
+    margin-right: 8px;
+    animation: pulse 1.4s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .25; } }
+  @media (prefers-reduced-motion: reduce) { .status-bar .dot { animation: none; } }
+
+  .wrap { max-width: 680px; margin: 0 auto; padding: 22px 16px 48px; }
+  .brand { font-weight: 800; font-size: 18px; letter-spacing: -.01em; margin-bottom: 18px; }
+
+  /* progress steps */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 0 0 22px; padding: 0; list-style: none; }
+  .steps li {
+    border-top: 5px solid var(--line);
+    padding-top: 8px;
+    font-size: 13px;
+    line-height: 1.3;
+    color: var(--ink-soft);
+  }
+  .steps b { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; }
+  .steps .done { border-color: var(--go); }
+  .steps .done b { color: var(--go); }
+  .steps .now { border-color: var(--alert); color: var(--ink); font-weight: 700; }
+  .steps .now b { color: var(--alert); }
+
+  h1 {
+    font-size: clamp(28px, 7vw, 40px);
+    line-height: 1.1;
+    letter-spacing: -.02em;
+    margin: 0 0 12px;
+    text-wrap: balance;
+  }
+  h1 em { font-style: normal; color: var(--alert); }
+  .lead { font-size: 19px; margin: 0 0 8px; }
+  .lead strong { background: linear-gradient(transparent 62%, #ffd9a8 62%); }
+  .time { color: var(--ink-soft); font-size: 15px; margin: 0 0 20px; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(14, 27, 44, .08);
+    overflow: hidden;
+  }
+  .card-head {
+    background: var(--ink);
+    color: #fff;
+    padding: 14px 18px;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .card-head span { display: block; font-weight: 400; font-size: 14px; opacity: .8; }
+  .form-box { padding: 8px 8px 4px; min-height: 420px; }
+  .form-box iframe { width: 100%; min-height: 420px; border: none; border-radius: 8px; display: block; }
+  .safe {
+    border-top: 1px solid var(--line);
+    padding: 12px 18px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    background: #fbfaf7;
+  }
+
+  .secure-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--go); color: #fff;
+    font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .06em;
+    padding: 4px 10px; border-radius: 999px;
+    margin-bottom: 8px;
+  }
+  .secure-tag svg { width: 12px; height: 12px; }
+  .trust { list-style: none; margin: 0; padding: 6px 18px 10px; border-top: 1px solid var(--line); background: #fbfaf7; }
+  .trust li {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 10px 0; font-size: 15px; line-height: 1.4;
+    border-bottom: 1px solid var(--line);
+  }
+  .trust li:last-child { border-bottom: none; }
+  .trust svg { flex: 0 0 22px; width: 22px; height: 22px; margin-top: 1px; color: var(--go); }
+  .trust b { display: block; }
+  .trust span { color: var(--ink-soft); }
+  @media (min-width: 620px) {
+    .trust { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 18px; }
+    .trust li { border-bottom: none; }
+  }
+
+  .hold {
+    margin: 22px 0 0;
+    background: var(--alert-bg);
+    border-left: 5px solid var(--alert);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .hold p { margin: 0; }
+  .hold p + p { margin-top: 6px; }
+
+  h2 { font-size: 22px; letter-spacing: -.01em; margin: 34px 0 12px; }
+  .why { list-style: none; padding: 0; margin: 0; }
+  .why li {
+    position: relative;
+    padding: 12px 0 12px 34px;
+    border-bottom: 1px solid var(--line);
+  }
+  .why li:last-child { border-bottom: none; }
+  .why li::before {
+    content: "";
+    position: absolute; left: 4px; top: 19px;
+    width: 14px; height: 8px;
+    border-left: 3px solid var(--go);
+    border-bottom: 3px solid var(--go);
+    transform: rotate(-45deg);
+  }
+  .how { padding: 0; margin: 0; list-style: none; counter-reset: how; }
+  .how li {
+    counter-increment: how;
+    position: relative;
+    padding: 6px 0 12px 44px;
+  }
+  .how li::before {
+    content: counter(how);
+    position: absolute; left: 0; top: 4px;
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--ink); color: #fff;
+    font-weight: 700; font-size: 15px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  details {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 0 16px;
+    margin-bottom: 8px;
+  }
+  summary { cursor: pointer; font-weight: 700; padding: 14px 0; }
+  details p { margin: 0 0 14px; color: var(--ink-soft); }
+
+  .back {
+    display: block;
+    margin: 28px 0 0;
+    background: var(--alert);
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 18px;
+    padding: 16px;
+    border-radius: 10px;
+  }
+  .back:focus-visible, summary:focus-visible { outline: 3px solid #1b6fd1; outline-offset: 3px; }
+  footer { margin-top: 30px; font-size: 13px; color: var(--ink-soft); line-height: 1.45; }
+</style>
+</head>
+<body>
+
+<div class="status-bar" role="status"><span class="dot"></span>Your funding request is on hold. One step is left.</div>
+
+<div class="wrap">
+  <div class="brand">Lendihub</div>
+
+  <ol class="steps" aria-label="Your progress">
+    <li class="done"><b>Step 1: Done</b>Request sent</li>
+    <li class="now"><b>Step 2: Do this now</b>Upload bank statements</li>
+    <li><b>Step 3: Locked</b>Lender review</li>
+  </ol>
+
+  <h1><span id="hello">Wait.</span> Your request is <em>not done yet.</em></h1>
+  <p class="lead">Lenders will not look at your file until they see your <strong>last 3 months of business bank statements.</strong> No statements, no offer.</p>
+  <p class="time">Upload them below. It takes about 2 minutes.</p>
+
+  <div class="card" id="upload">
+    <div class="card-head"><div class="secure-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Secure upload</div><br>Upload your last 3 months of business bank statements
+      <span>PDFs from your bank work best. You can add more than one file.</span>
+    </div>
+    <div class="form-box">
+      <iframe
+        id="inline-jhBC5sVjbx4zQeUp3D0Q"
+        data-layout="{'id':'INLINE'}"
+        data-trigger-type="alwaysShow"
+        data-trigger-value=""
+        data-activation-type="alwaysActivated"
+        data-activation-value=""
+        data-deactivation-type="neverDeactivate"
+        data-deactivation-value=""
+        data-form-name="Form 5"
+        data-height="790"
+        data-layout-iframe-id="inline-jhBC5sVjbx4zQeUp3D0Q"
+        data-form-id="jhBC5sVjbx4zQeUp3D0Q"
+        data-cookie-consent="true"
+        data-cookie-consent-provider="auto"
+        title="Upload your bank statements">
+      </iframe>
+    </div>
+    <ul class="trust" aria-label="How your files are kept safe">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><div><b>Secure, encrypted upload</b><span>Your files are locked while they are sent.</span></div></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.2 7.7-8 9-4.800-1.300-8-4.500-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg><div><b>We never ask for your bank login</b><span>No password. No account access. A statement cannot be used to move money.</span></div></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><div><b>Used for one thing only</b><span>Your funding team uses them to review your request.</span></div></li>
+    </ul>
+  </div>
+
+  <div class="hold">
+    <p><strong>What happens if you skip this?</strong></p>
+    <p>Your request stays on hold. No lender sees it. No offer gets made. The sooner you upload, the sooner your file moves.</p>
+  </div>
+
+  <h2>Why lenders need this</h2>
+  <ul class="why">
+    <li><strong>It is how they set your amount.</strong> Your deposits show how much your business can get.</li>
+    <li><strong>It is a must for every file.</strong> Lenders do not make offers without statements.</li>
+    <li><strong>It makes your call count.</strong> When your statements are in, your funding specialist can talk real numbers with you.</li>
+  </ul>
+
+  <h2>How to get your statements fast</h2>
+  <ol class="how">
+    <li>Log in to your business bank on your phone or computer.</li>
+    <li>Find "Statements" and save the last 3 months as PDFs.</li>
+    <li>Come back here, tap the upload box, and pick the files.</li>
+  </ol>
+
+  <h2>Quick answers</h2>
+  <details>
+    <summary>Is it safe to send my statements?</summary>
+    <p>Yes. The upload is encrypted, so your files are locked while they are sent. We never ask for your bank login or password. A statement is a record of what came in and went out. No one can move money with it.</p>
+  </details>
+  <details>
+    <summary>I do not have them with me right now.</summary>
+    <p>Save this page so you can come back. Your request stays on hold until your statements are in, so the best time is now.</p>
+  </details>
+  <details>
+    <summary>Can I send photos or screenshots?</summary>
+    <p>PDFs from your bank are best. Lenders can read them the fastest. Clear photos of every page work if that is all you have.</p>
+  </details>
+  <details>
+    <summary>I have more than one business bank account.</summary>
+    <p>Upload the last 3 months for each one. You can add many files at once.</p>
+  </details>
+
+  <a class="back" href="#upload">Upload my statements now</a>
+
+  <footer>
+    Sending your bank statements does not mean you are approved. All funding is subject to lender review and approval. Amounts and terms depend on your business.
+  </footer>
+</div>
+
+<script>
+/* Pass the lead's details from this page's URL into the hidden fields of the form.
+   Accepts a few common spellings of each key and sends the form the keys it expects:
+   first_name, last_name, email, phone. */
+(function () {
+  var FORM_URL = "https://api.leadconnectorhq.com/widget/form/jhBC5sVjbx4zQeUp3D0Q";
+  var ALIASES = {
+    first_name: ["first_name", "firstname", "first", "fname"],
+    last_name:  ["last_name", "lastname", "last", "lname"],
+    email:      ["email", "email_address", "emailaddress"],
+    phone:      ["phone", "phone_number", "phonenumber", "mobile"]
+  };
+  var incoming = new URLSearchParams(window.location.search);
+  var seen = {};
+  incoming.forEach(function (value, key) {
+    seen[key.toLowerCase().replace(/[\s-]+/g, "_")] = value;
+  });
+  var out = new URLSearchParams();
+  Object.keys(ALIASES).forEach(function (target) {
+    for (var i = 0; i < ALIASES[target].length; i++) {
+      var v = seen[ALIASES[target][i]];
+      if (v) { out.set(target, v); break; }
+    }
+  });
+  var qs = out.toString();
+  document.getElementById("inline-jhBC5sVjbx4zQeUp3D0Q").src = FORM_URL + (qs ? "?" + qs : "");
+
+  var first = out.get("first_name");
+  if (first) {
+    first = first.trim().slice(0, 30);
+    document.getElementById("hello").textContent = first + ", wait.";
+  }
+})();
+</script>
+<script src="https://link.msgsndr.com/js/form_embed.js"></script>
+</body>
+</html>
